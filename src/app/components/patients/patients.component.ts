@@ -21,6 +21,6 @@ export class PatientsComponent implements OnInit {
   constructor(private patientsService:PatientsService) { }
 
   async ngOnInit(){
-    this.patients =(await this.patientsService.all(this.name));
+    this.patients =(await this.patientsService.all());
   }
 } 

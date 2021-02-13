@@ -20,7 +20,7 @@ export class SwabComponent implements OnInit {
   constructor(private swabsService: SwabsService) { }
 
   async ngOnInit(){
-    this.swabs = (await this.swabsService.allSwabs(this.swab_id))
+    this.swabs = (await this.swabsService.allSwabs())
   }
 
 }

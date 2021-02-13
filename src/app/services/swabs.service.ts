@@ -8,5 +8,5 @@ import { Swabs } from '../interface/list-of-swabs';
 export class SwabsService {
   url: string = 'http://localhost:3000/swabs'
   constructor(private httpClient: HttpClient) { }
-  allSwabs=(swab_id:number)=>this.httpClient.get<Swabs[]>(this.url).toPromise(); 
+  allSwabs=()=>this.httpClient.get<Swabs[]>(this.url).toPromise(); 
 }
