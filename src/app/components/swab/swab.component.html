@@ -1,0 +1,30 @@
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <h3>Covid's Swabs </h3>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Team</th>
+            <th scope="col">Date</th>
+            <th scope="col">Type's Swabs</th>
+            <th scope="col">Patient Id</th>
+            <th scope="col">Email</th>
+            <th scope="col">Swab Done</th>
+            <th scope="col">Positive Swab</th>
+          </tr>
+        </thead>
+        <tbody  *ngFor='let swabs of swabs'>
+          <tr>
+            <th scope="row">{{swabs.swab_id}}</th>
+            <td>{{swabs.team_id}}</td>
+            <td>{{swabs.date}}</td>
+            <td>{{swabs.type}}</td>
+            <td>{{swabs.patient_id}}</td>
+            <td>{{swabs.done}}</td>
+            <td>{{swabs.positive_res}}</td>
+            <td [routerLink]="">select</td>
+        </tbody>
+      </table>
+    </div>
+    
