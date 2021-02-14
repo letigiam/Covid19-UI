@@ -8,6 +8,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { PatientsComponent } from './components/patients/patients.component';
 import { SwabComponent } from './components/swab/swab.component';
+import { TablePaginationPatientsComponent } from './components/table-pagination-patients/table-pagination-patients.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TablePaginationSwabsComponent } from './components/table-pagination-swabs/table-pagination-swabs.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +24,21 @@ import { SwabComponent } from './components/swab/swab.component';
     NavbarComponent,
     PatientsComponent,
     SwabComponent,
+    TablePaginationPatientsComponent,
+    CalendarComponent,
+    TablePaginationSwabsComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTableModule,
+    MatFormFieldModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

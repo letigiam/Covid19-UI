@@ -7,17 +7,9 @@ import { PatientsService } from 'src/app/services/patients.service';
   templateUrl:'./patients.component.html',
   styleUrls: ['./patients.component.css']
 })
+
 export class PatientsComponent implements OnInit {
   public patients: Patients[]=[];
-  patient_id: number=0;
-  name: string="";
-  fiscal_code: string="";
-  dob: string="";
-  address: string="";
-  email: string="";
-  phone: number=0;
-  hasCovid: boolean=false;
-
   constructor(private patientsService:PatientsService) { }
 
   async ngOnInit(){

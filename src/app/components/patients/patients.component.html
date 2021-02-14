@@ -1,30 +1,5 @@
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
-<h3>Covid's Patients </h3>
-<table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Name</th>
-        <th scope="col">Fiscal Code</th>
-        <th scope="col">Birth's Day</th>
-        <th scope="col">Address</th>
-        <th scope="col">Email</th>
-        <th scope="col">Phone</th>
-        <th scope="col">Has Covid</th>
-      </tr>
-    </thead>
-    <tbody  *ngFor='let patient of patients'>
-      <tr>
-        <th scope="row">{{patient.patient_id}}</th>
-        <td>{{patient.name}} </td>
-        <td>{{patient.fiscal_code}}</td>
-        <td>{{patient.dob}}</td>
-        <td>{{patient.address}}</td>
-        <td>{{patient.email}}</td>
-        <td>{{patient.phone}}</td>
-        <td>{{patient.hasCovid}}</td>
-        <td [routerLink]="">select</td>
-    </tbody>
-  </table>
+<div class="row">
+    <h3>Covid's Patients </h3>
+    <app-table-pagination-patients></app-table-pagination-patients>
 </div>

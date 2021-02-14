@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import{HttpClient} from '@angular/common/http'
 import { Patients } from '../interface/list-of-patients';
-import { NgForm } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -11,4 +10,5 @@ export class PatientsService {
   active: any;
   constructor(private httpClient: HttpClient) {}
   all=()=>this.httpClient.get<Patients[]>(this.url).toPromise();
+  
 }

@@ -9,14 +9,6 @@ import { SwabsService } from 'src/app/services/swabs.service';
 })
 export class SwabComponent implements OnInit {
   public swabs: Swabs[]=[];
-  swab_id: number=0;
-  team_id: number=0;
-  date: string="";
-  type: "rap" | "sier" | "mol" | undefined;
-  patient_id: number=0;
-  done: boolean=false;
-  positive_res: boolean=false;
-
   constructor(private swabsService: SwabsService) { }
 
   async ngOnInit(){
