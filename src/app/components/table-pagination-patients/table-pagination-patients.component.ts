@@ -13,9 +13,9 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class TablePaginationPatientsComponent implements OnInit {
   public patients: Patients[]=[];
-  displayedColumns: string[] = ['patient_id', 'name', 'fiscal_code', 'dob', 'address', 'email', 'phone', 'hasCovid'];
+  displayedColumns: string[] = ['patient_id', 'name', 'fiscal_code', 'dob', 'address', 'email', 'phone', 'hasCovid', 'model'];
   dataSource = this.patients;
-
+  
   constructor(private patientsService:PatientsService) { }
 
   async ngOnInit(){

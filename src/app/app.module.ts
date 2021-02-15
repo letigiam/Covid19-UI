@@ -17,6 +17,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TablePaginationSwabsComponent } from './components/table-pagination-swabs/table-pagination-swabs.component';
+import { PatientPutModalComponent } from './components/patient-put-modal/patient-put-modal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { TablePaginationSwabsComponent } from './components/table-pagination-swa
     TablePaginationPatientsComponent,
     CalendarComponent,
     TablePaginationSwabsComponent,
+    PatientPutModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { TablePaginationSwabsComponent } from './components/table-pagination-swa
     MatNativeDateModule,
     MatTableModule,
     MatFormFieldModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

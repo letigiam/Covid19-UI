@@ -10,5 +10,6 @@ export class PatientsService {
   active: any;
   constructor(private httpClient: HttpClient) {}
   all=()=>this.httpClient.get<Patients[]>(this.url).toPromise();
+  getPatient=(id:string)=>this.httpClient.get<Patients>('http://localhost:3000/patients/'+id).toPromise();
   
 }
