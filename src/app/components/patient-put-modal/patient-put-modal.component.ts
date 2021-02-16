@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgbActiveModal,NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Patients } from 'src/app/interface/list-of-patients';
 import { PatientsService } from 'src/app/services/patients.service';
 
@@ -10,14 +11,20 @@ import { PatientsService } from 'src/app/services/patients.service';
 })
 export class PatientPutModalComponent implements OnInit {
   public patient:any;
-  public id:string="";
-  constructor(private activateRouter:ActivatedRoute, private patientsService:PatientsService) { }
+  public id="";
+  @Input() patient_id:any;
 
-  async ngOnInit(){
-    const idPatient = this.activateRouter.snapshot.params.patient_id;
-    this.id=idPatient
-    console.log(this.id);
-    this.patient= await this.patientsService.getPatient(this.id);
-    console.log(this.patient.patient_id);
+  constructor(private activateRouter:ActivatedRoute, private patientsService:PatientsService) { 
+   // this.patient_id= String(this.activateRouter.snapshot.params.id);
+    //console.log(this.patient_id);
+   // console.log("this.id:"+this.patient_id);
   }
+
+   ngOnInit(){
+   
+   // this.patient= await this.patientsService.getPatient(this.id);
+    //console.log(this.patient.patient_id);
+  }
+ 
+ 
 }

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="registerContainer">
+            <p class="text-center">Inserisci dati</p>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="addon-wrapping" style="width: 120px;">Nome Banca</span>
+                <input [(ngModel)]="name" type="text" class="form-control" placeholder="Username" aria-label="Username">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="addon-wrapping" style="width: 120px;">Nome Banca</span>
+                <input [(ngModel)]="email" type="text" class="form-control" placeholder="Username" aria-label="Username">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="addon-wrapping" style="width: 120px;">Nome Banca</span>
+                <input [(ngModel)]="dob" type="text" class="form-control" placeholder="Username" aria-label="Username">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="addon-wrapping" style="width: 120px;">Nome Banca</span>
+                <input [(ngModel)]="fiscal_code" type="text" class="form-control" placeholder="Username" aria-label="Username">
+            </div>
+            
+            <div class="input-group flex-nowrap mt-2">
+                <span class="input-group-text" id="addon-wrapping" style="width: 120px;">Budget</span>
+                <input [(ngModel)]="address" type="number" class="form-control" placeholder="budget" aria-label="budget" aria-describedby="addon-wrapping">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="addon-wrapping" style="width: 120px;">Nome Banca</span>
+                <input [(ngModel)]="phone" type="text" class="form-control" placeholder="Username" aria-label="Username">
+            </div>
+            <div class="input-group flex-nowrap mt-2">
+                <span class="input-group-text" id="addon-wrapping" style="width: 120px;">Fee</span>
+                <input [(ngModel)]="hasCovid" type="number" class="form-control" placeholder="fee" aria-label="fee" aria-describedby="addon-wrapping">
+            </div>        
+            <button type="button" class="btn btn-primary mt-4" (click)="postPatient()">Registra Banca</button>
+            <p class="message" [hidden]="message===''">{{message}}</p>
+        </div>
+    </div>
+</div>
+
+-->
+
+<a  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Add Patient
+</a>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Patient Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="example-form">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Name</mat-label>
+                  <input matInput placeholder="Pippo" [(ngModel)]="name" value="">
+                </mat-form-field>
+                <br>            
+                <mat-form-field class="example-full-width">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="name@email.com" [(ngModel)]="email" value="">
+                </mat-form-field>
+                <br>    
+                <mat-form-field appearance="fill" style="z-index: 2000;">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker"  [(ngModel)]="dob">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                <br>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Fiscal Code</mat-label>
+                    <input matInput placeholder="TRRLRT...."  [(ngModel)]="fiscal_code" value="">
+                </mat-form-field>
+                <br>    
+                <mat-form-field class="example-full-width">
+                    <mat-label>Address</mat-label>
+                    <input matInput placeholder="via galermo" [(ngModel)]="address" value="">
+                </mat-form-field>
+                <br>    
+                <mat-form-field class="example-full-width">
+                    <mat-label>Telephone Number</mat-label>
+                    <input matInput placeholder="34012657851" [(ngModel)]="phone" value="">
+                </mat-form-field>
+                <br>    
+                <mat-form-field class="example-full-width">
+                    <mat-label>Has Covid?</mat-label>
+                    <input matInput placeholder="false or true" [(ngModel)]="hasCovid" value="false">
+                </mat-form-field>
+                <br>    
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="postPatient()">Save changes</button>
+          <p class="message" [hidden]="message===''">{{message}}</p>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -12,4 +12,5 @@ export class PatientsService {
   all=()=>this.httpClient.get<Patients[]>(this.url).toPromise();
   getPatient=(id:string)=>this.httpClient.get<Patients>('http://localhost:3000/patients/'+id).toPromise();
   
+  addPatient=(name:string, email:string, dob:string, fiscal_code:string, address:string, phone:number, hasCovid:boolean)=>this.httpClient.post(this.url,{name, email, dob, fiscal_code, address, phone, hasCovid});
 }

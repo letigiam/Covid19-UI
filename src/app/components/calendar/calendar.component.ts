@@ -11,6 +11,8 @@ export class CalendarComponent implements OnInit {
     start: new FormControl(),
     end: new FormControl()
   });
+
+  time = {hour: 13, minute: 30};
   constructor() { }
 
   ngOnInit(): void {
