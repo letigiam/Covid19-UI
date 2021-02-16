@@ -1,18 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PatientPutModalComponent } from './components/patient-put-modal/patient-put-modal.component';
+import { LoginComponent } from './components/login/login.component';
+import { PatientAddComponent } from './components/patient-add/patient-add.component';
 import { PatientsComponent } from './components/patients/patients.component';
 import { SwabComponent } from './components/swab/swab.component';
 
 const routes: Routes = [
-  {path:'patients', component:PatientsComponent,
-    children:[{path:':patient_id', component:PatientPutModalComponent}]
+  {
+    path: 'patients',
+    component: PatientsComponent,
+    children: [{ path: 'registerPatient', component: PatientAddComponent }],
   },
-  {path:'swabs', component:SwabComponent}
+  { path: 'swabs', component: SwabComponent },
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

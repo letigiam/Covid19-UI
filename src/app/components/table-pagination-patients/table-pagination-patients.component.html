@@ -1,61 +1,107 @@
-<div class="mat-elevation-z8">
-  <table mat-table [dataSource]="patients">
+<!DOCTYPE html>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Fiscal Code</th>
+      <th scope="col">Birth's Day</th>
+      <th scope="col">Address</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Has Covid</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let patient of patients">
+    <tr>
+      <th scope="row">{{ patient.patient_id }}</th>
+      <td>{{ patient.name }}</td>
+      <td>{{ patient.fiscal_code }}</td>
+      <td>{{ patient.dob }}</td>
+      <td>{{ patient.address }}</td>
+      <td>{{ patient.email }}</td>
+      <td>{{ patient.phone }}</td>
+      <td>{{ patient.hasCovid }}</td>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="openModal(editProfileModal, patient)"
+      >
+        Edit
+      </button>
+    </tr>
+  </tbody>
+</table>
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="patient_id">
-      <th mat-header-cell *matHeaderCellDef> Id </th>
-      <td mat-cell *matCellDef="let patients"> {{patients.patient_id}} </td>
-    </ng-container>
+<ng-template #editProfileModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="editProfileLabel">Edit Patient</h5>
+    <button
+      type="button"
+      class="close"
+      (click)="modal.dismiss()"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let patients"> {{patients.name}} </td>
-    </ng-container>
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="fiscal_code">
-      <th mat-header-cell *matHeaderCellDef> Fiscal Code </th>
-      <td mat-cell *matCellDef="let patients"> {{patients.fiscal_code}} </td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="dob">
-      <th mat-header-cell *matHeaderCellDef> Birth's Day </th>
-      <td mat-cell *matCellDef="let patients"> {{patients.dob}} </td>
-    </ng-container>
-
-     <!-- Name Column -->
-     <ng-container matColumnDef="address">
-      <th mat-header-cell *matHeaderCellDef> Address </th>
-      <td mat-cell *matCellDef="let patients"> {{patients.address}} </td>
-    </ng-container>
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> Email </th>
-      <td mat-cell *matCellDef="let patients"> {{patients.email}} </td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="phone">
-      <th mat-header-cell *matHeaderCellDef> Phone </th>
-      <td mat-cell *matCellDef="let patients"> {{patients.phone}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="hasCovid">
-      <th mat-header-cell *matHeaderCellDef> Has Covid </th>
-      <td mat-cell *matCellDef="let patients"> {{patients.hasCovid}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="model">
-      <th mat-header-cell *matHeaderCellDef=""></th>
-      <td mat-cell *matCellDef="let patients"><app-patient-put-modal routerLink='/patients/{{patients.patient_id}}'></app-patient-put-modal></td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
-  <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
-</div>
+  <div class="modal-body">
+    <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
+      <div class="form-group row">
+        <label for="name" class="col-sm-4 col-form-label">Name</label>
+        <div class="col-sm-8">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="name"
+            id="name"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="email" class="col-sm-4 col-form-label">Email</label>
+        <div class="col-sm-8">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="email"
+            id="email"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="dob" class="col-sm-4 col-form-label">Date of birth</label>
+        <div class="col-sm-8">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="dob"
+            id="dob"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="hasCovid" class="col-sm-4 col-form-label">has Covid</label>
+        <div class="col-sm-8">
+          <input
+            type="checkbox"
+            class="form-control"
+            formControlName="hasCovid"
+            id="hasCovid"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="modal.dismiss()"
+        >
+          Close
+        </button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

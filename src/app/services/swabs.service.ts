@@ -11,9 +11,7 @@ export class SwabsService {
   constructor(
     private httpClient: HttpClient,
     private localStorageService: LocalStorageService
-  ) {
-    console.log(this.localStorageService.get('token'));
-  }
+  ) {}
   allSwabs = () =>
     this.httpClient
       .get<Swabs[]>(this.url, {

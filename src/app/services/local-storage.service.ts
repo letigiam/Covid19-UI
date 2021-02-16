@@ -17,7 +17,7 @@ export class LocalStorageService {
   }
   set(key: string, value: any): boolean {
     if (this.isLocalStorageSupported) {
-      this.localStorage.setItem(key, JSON.stringify(value));
+      this.localStorage.setItem(key, value);
       this.changes$.next({
         type: 'set',
         key,
