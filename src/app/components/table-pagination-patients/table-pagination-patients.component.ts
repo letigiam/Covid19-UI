@@ -1,14 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Patients } from 'src/app/interface/list-of-patients';
 import { PatientsService } from 'src/app/services/patients.service';
-import { AfterViewInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 
-//import { PeriodicElement} from 'src/app/interface/periodic-element';
 
 @Component({
   selector: 'app-table-pagination-patients',
@@ -19,6 +15,13 @@ export class TablePaginationPatientsComponent implements OnInit {
   @Input() patient_id!: string;
   public patients: any;
   editProfileForm!: FormGroup;
+  public id_patient="";
+  email="";
+  address="";
+  phone=0;
+  hasCovid=false;
+  message="";
+  public patientModified:any;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,12 +34,13 @@ export class TablePaginationPatientsComponent implements OnInit {
     this.patients = await this.patientsService.getAllPatients();
 
     this.editProfileForm = this.fb.group({
-      name: [''],
+      address: [''],
       email: [''],
-      dob: [''],
+      phone: [''],
       hasCovid: [''],
     });
   }
+
   openModal(targetModal: any, patient: Patients) {
     this.modalService.open(targetModal, {
       centered: true,
@@ -44,14 +48,47 @@ export class TablePaginationPatientsComponent implements OnInit {
     });
 
     this.editProfileForm.patchValue({
-      name: patient.name,
+      address: patient.address,
       email: patient.email,
-      dob: patient.dob,
+      phone: patient.phone,
       hasCovid: patient.hasCovid,
     });
   }
+
   onSubmit() {
     this.modalService.dismissAll();
     console.log('res:', this.editProfileForm.getRawValue());
+    this.patientModified=this.editProfileForm.getRawValue();
+    console.log(this.patientModified);
+    console.log(this.patientModified.address);
+    this.putPatient();
+  }
+  onDelete(){
+    console.log("ciao!!");
+    this.delPatient();
+    this.modalService.dismissAll();
+  }
+  putPatient=()=>{
+    this.patientsService.putPatient(this.id_patient, this.patientModified.address, this.patientModified.email, this.patientModified.phone, this.patientModified.hasCovid).subscribe((Response)=>{
+      this.message = "Patient Modified"
+    }, (error)=>{
+      this.message="Error";
+      console.log("Error is, ", error);
+    });
+  }  
+
+  setId(patient_id:string){
+    console.log(patient_id);
+    this.id_patient = patient_id;
+  }
+
+  delPatient=()=>{
+    console.log("Funziona?");
+    this.patientsService.deletePatient(this.id_patient).subscribe((Response)=>{
+      this.message = "Patient Delete"
+    }, (error)=>{
+      this.message="Error";
+      console.log("Error is, ", error);
+    });
   }
 }

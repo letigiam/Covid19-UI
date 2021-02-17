@@ -22,6 +22,7 @@ import { TablePaginationSwabsComponent } from './components/table-pagination-swa
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PatientAddComponent } from './components/patient-add/patient-add.component';
 import { LoginComponent } from './components/login/login.component';
+import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { LoginComponent } from './components/login/login.component';
     TablePaginationSwabsComponent,
     PatientAddComponent,
     LoginComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -48,6 +50,8 @@ import { LoginComponent } from './components/login/login.component';
     ReactiveFormsModule,
     NgbModule,
     MatInputModule,
+    NgbPaginationModule, 
+    NgbAlertModule
   ],
   providers: [],
   bootstrap: [AppComponent],

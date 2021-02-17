@@ -18,6 +18,7 @@ export class PatientsService {
         headers: { 'x-auth-token': this.localStorageService.get('token') },
       })
       .toPromise();
+      
   getPatient = (id: string) =>
     this.httpClient
       .get<Patients>(`http://localhost:3000/patients/${id}`, {
@@ -33,9 +34,7 @@ export class PatientsService {
     address: string,
     phone: number,
     hasCovid: boolean
-  ) =>
-    this.httpClient.post(
-      this.url,
+  ) =>this.httpClient.post(this.url,
       {
         name,
         email,
@@ -47,4 +46,20 @@ export class PatientsService {
       },
       { headers: { 'x-auth-token': this.localStorageService.get('token') } }
     );
+
+    putPatient = (
+      id: string,
+      address: string,
+      email: string,
+      phone: number,
+      hasCovid: boolean
+      )=> this.httpClient.put(`http://localhost:3000/patients/${id}`, {address, email, phone, hasCovid}, 
+        { headers: { 'x-auth-token': this.localStorageService.get('token') } }
+    );
+
+     deletePatient = (id: string) =>
+     this.httpClient
+       .delete<Patients>(`http://localhost:3000/patients/${id}`, {
+         headers: { 'x-auth-token': this.localStorageService.get('token') },
+    });
 }

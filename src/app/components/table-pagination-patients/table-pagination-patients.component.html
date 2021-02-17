@@ -25,15 +25,14 @@
       <button
         type="button"
         class="btn btn-primary"
-        (click)="openModal(editProfileModal, patient)"
-      >
+        (click)="openModal(editProfileModal, patient); setId(patient.patient_id)">
         Edit
       </button>
     </tr>
   </tbody>
 </table>
 
-<ng-template #editProfileModal let-modal>
+<ng-template #editProfileModal let-modal >
   <div class="modal-header">
     <h5 class="modal-title" id="editProfileLabel">Edit Patient</h5>
     <button
@@ -49,13 +48,13 @@
   <div class="modal-body">
     <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
       <div class="form-group row">
-        <label for="name" class="col-sm-4 col-form-label">Name</label>
+        <label for="address" class="col-sm-4 col-form-label">Address</label>
         <div class="col-sm-8">
           <input
             type="text"
             class="form-control"
-            formControlName="name"
-            id="name"
+            formControlName="address"
+            id="address"
           />
         </div>
       </div>
@@ -71,37 +70,37 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="dob" class="col-sm-4 col-form-label">Date of birth</label>
+        <label for="phone" class="col-sm-4 col-form-label">Phone</label>
         <div class="col-sm-8">
           <input
             type="text"
             class="form-control"
-            formControlName="dob"
-            id="dob"
+            formControlName="phone"
+            id="phone"
           />
         </div>
       </div>
       <div class="form-group row">
         <label for="hasCovid" class="col-sm-4 col-form-label">has Covid</label>
         <div class="col-sm-8">
-          <input
-            type="checkbox"
-            class="form-control"
-            formControlName="hasCovid"
-            id="hasCovid"
-          />
+          <input type="text" class="form-control" formControlName="hasCovid"  id="hasCovid"/>
         </div>
+        <!-- <div class="col-sm-8">
+              <select class="form-control">
+                <option value="null">Select 0 *</option>
+                <option value="true">0</option>
+                <option value="false">1</option>
+              </select>
+        </div>   -->
       </div>
       <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          (click)="modal.dismiss()"
-        >
+        
+        <button type="button"class="btn btn-secondary"(click)="modal.dismiss()">
           Close
         </button>
         <button type="submit" class="btn btn-primary">Save changes</button>
       </div>
     </form>
+     <button class="btn btn-primary" (click)="onDelete()">Delete</button>
   </div>
 </ng-template>
