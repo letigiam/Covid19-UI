@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<a
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal12"
+>
+  Program a new Swab
+</a>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal12"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel12"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel12">New Swab</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <select
+            [(ngModel)]="team_id"
+            class="form-select"
+            aria-label="Default select example"
+            [ngClass]="[team_id.includes('ERROR') ? 'error' : '']"
+          >
+            <option value="" selected disabled>Team</option>
+            <option value="1">Pappalardo - Sambataro</option>
+            <option value="2">Zappulla - Troina</option>
+            <option value="3">Prestifilippo - Del Pozzo</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="date" class="form-label">Date and time</label>
+          <input
+            [(ngModel)]="date"
+            type="date"
+            class="form-control"
+            id="date"
+            [ngClass]="[date.includes('ERROR') ? 'error' : '']"
+          />
+          <ngb-timepicker [(ngModel)]="time"></ngb-timepicker>
+        </div>
+        <div class="mb-3">
+          <select
+            [(ngModel)]="type"
+            class="form-select"
+            aria-label="swab type"
+            [ngClass]="[type.includes('ERROR') ? 'error' : '']"
+          >
+            <option value="" selected disabled>Swab type</option>
+
+            <option value="mol">Molecular</option>
+            <option value="rap">Rapid</option>
+            <option value="sier">Syerologic</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <select
+            [(ngModel)]="patient_id"
+            class="form-select"
+            aria-label="patient"
+            [ngClass]="[patient_id.includes('ERROR') ? 'error' : '']"
+            placeholder="Select a patient"
+          >
+            <option value="" selected disabled>Patient</option>
+
+            <option
+              *ngFor="let patient of patients"
+              value="{{ patient.patient_id }}"
+            >
+              {{ patient.name }} - {{ patient.fiscal_code }}
+            </option>
+          </select>
+          <app-patient-add></app-patient-add>
+        </div>
+        <div class="form-check">
+          <input
+            [(ngModel)]="done"
+            type="checkbox"
+            class="form-check-input"
+            value=""
+          />
+          <label for="done" class="form-label">Already Done</label>
+        </div>
+        <div class="form-check">
+          <input
+            [(ngModel)]="positive_res"
+            type="checkbox"
+            class="form-check-input"
+            id="positive_res"
+            value=""
+          />
+          <label for="positive_res" class="form-check-label"
+            >Positive Result</label
+          >
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" (click)="postSwab()">
+          Save Swab
+        </button>
+        <br /><br />
+        <p class="message" [hidden]="message === ''">{{ message }}</p>
+      </div>
+    </div>
+  </div>
+</div>

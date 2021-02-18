@@ -9,6 +9,7 @@ import { LocalStorageService } from './local-storage.service';
 })
 export class SwabsService {
   url: string = 'http://localhost:3000/swabs';
+
   constructor(
     private httpClient: HttpClient,
     private localStorageService: LocalStorageService
@@ -21,4 +22,29 @@ export class SwabsService {
         },
       })
       .toPromise();
+
+  addSwab = (
+    team_id: string,
+    date: string,
+    type: string,
+    patient_id: string,
+    done: string,
+    positive_res: string
+  ) =>
+    this.httpClient.post(
+      this.url,
+      {
+        team_id,
+        date,
+        type,
+        patient_id,
+        done,
+        positive_res,
+      },
+      {
+        headers: {
+          'x-auth-token': this.localStorageService.get('token'),
+        },
+      }
+    );
 }

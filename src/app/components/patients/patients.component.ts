@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Patients } from 'src/app/interface/list-of-patients';
+import { Patient } from 'src/app/interface/list-of-patients';
 
 @Component({
   selector: 'app-patients',
@@ -7,7 +7,7 @@ import { Patients } from 'src/app/interface/list-of-patients';
   styleUrls: ['./patients.component.css'],
 })
 export class PatientsComponent implements OnInit {
-  public patients: Patients[] = [];
+  public patients: Patient[] = [];
   constructor() {}
   async ngOnInit() {}
 }

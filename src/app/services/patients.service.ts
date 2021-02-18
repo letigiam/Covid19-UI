@@ -1,7 +1,7 @@
 import { LocalStorageService } from './local-storage.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Patients } from '../interface/list-of-patients';
+import { Patient } from '../interface/list-of-patients';
 @Injectable({
   providedIn: 'root',
 })
@@ -14,14 +14,14 @@ export class PatientsService {
   ) {}
   getAllPatients = () =>
     this.httpClient
-      .get<Patients[]>(this.url, {
+      .get<Patient[]>(this.url, {
         headers: { 'x-auth-token': this.localStorageService.get('token') },
       })
       .toPromise();
 
   getPatient = (id: string) =>
     this.httpClient
-      .get<Patients>(`http://localhost:3000/patients/${id}`, {
+      .get<Patient>(`http://localhost:3000/patients/${id}`, {
         headers: { 'x-auth-token': this.localStorageService.get('token') },
       })
       .toPromise();
@@ -63,7 +63,7 @@ export class PatientsService {
     );
 
   deletePatient = (id: string) =>
-    this.httpClient.delete<Patients>(`http://localhost:3000/patients/${id}`, {
+    this.httpClient.delete<Patient>(`http://localhost:3000/patients/${id}`, {
       headers: { 'x-auth-token': this.localStorageService.get('token') },
     });
 }
