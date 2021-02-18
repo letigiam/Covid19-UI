@@ -3,6 +3,7 @@ import { Patient } from 'src/app/interface/list-of-patients';
 import { PatientsService } from 'src/app/services/patients.service';
 import { SwabsService } from 'src/app/services/swabs.service';
 
+
 @Component({
   selector: 'app-swab-add',
   templateUrl: './swab-add.component.html',
@@ -19,9 +20,12 @@ export class SwabAddComponent implements OnInit {
   time = { hour: 13, minute: 30 };
   patients: Patient[] = [];
   constructor(
+    
     private service: SwabsService,
     private patientService: PatientsService
   ) {}
+
+ 
 
   async ngOnInit() {
     this.patients = await this.patientService.getAllPatients();

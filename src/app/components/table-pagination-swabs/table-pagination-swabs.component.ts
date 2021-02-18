@@ -14,6 +14,8 @@ export class TablePaginationSwabsComponent implements OnInit {
   public allSwabs: any;
   public daysSelected: string[] = [];
   public daysSelectedContent: any[] = [];
+  public swabRange:any
+  
   range = new FormGroup({
     start: new FormControl(),
     end: new FormControl(),
@@ -38,11 +40,20 @@ export class TablePaginationSwabsComponent implements OnInit {
     this.daysSelectedContent = Object.values(this.allSwabs);
   }
   getSwabsByDate = async () => {
-    console.log(this.range.value.start, this.range.value.end);
+    var ds= new Date( this.range.value.start);
+    var dstostring= moment(ds).format('YYYY-MM-DD');
+    var ed= new Date(this.range.value.end);
+    var edtostring= moment(ed).format('YYYY-MM-DD');
+    console.log("range start:"+ this.range.value.start);
+    console.log("range end:"+ this.range.value.end);
+    console.log("ds:"+dstostring)
+    console.log("ed:"+edtostring)
+    
     this.allSwabs = await this.swabsService.allSwabsByDate(
-      this.range.value.start,
-      this.range.value.end
-    );
-    console.log(this.allSwabs);
+      dstostring,
+      edtostring
+    )
+    console.log("this swabrange:" +this.swabRange)
+    
   };
 }

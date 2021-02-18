@@ -23,15 +23,16 @@
       <td>{{ patient.email }}</td>
       <td>{{ patient.phone }}</td>
       <td>{{ patient.hasCovid }}</td>
-      <button
+      <td> <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-success btn-edit "
         (click)="
           openModal(editProfileModal, patient); setId(patient.patient_id)
         "
       >
         Edit
-      </button>
+      </button></td>
+     
     </tr>
   </tbody>
 </table>
@@ -105,14 +106,14 @@
       <div class="modal-footer">
         <button
           type="button"
-          class="btn btn-secondary"
+          class="btn btn-secondary btn-radius"
           (click)="modal.dismiss()"
         >
           Close
         </button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-success btn-radius">Save changes</button>
       </div>
     </form>
-    <button class="btn btn-primary" (click)="onDelete()">Delete</button>
+    <button class="btn btn-danger btn-radius" (click)="onDelete()">Delete</button>
   </div>
 </ng-template>
