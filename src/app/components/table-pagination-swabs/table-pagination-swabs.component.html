@@ -9,8 +9,10 @@
       <td *ngFor="let dayContent of daysSelectedContent">
         <div *ngFor="let swab of dayContent" class="card">
           <h3>Team {{ swab.team_id }} - type: {{ swab.type }}</h3>
-          <p>{{ swab.date.substring(10, 16) }}</p>
-          <p>patient :{{ swab.patient_id }}</p>
+          <p><i class="fas fa-clock"></i>{{ swab.date.substring(10, 16) }}</p>
+          <p>{{ swab.name }}</p>
+          <p><i class="fas fa-house-user"></i>{{ swab.address }}</p>
+          <p><i class="fas fa-phone"></i>{{ swab.phone }}</p>
           <p>
             Done :
             <i

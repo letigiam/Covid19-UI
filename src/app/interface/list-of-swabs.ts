@@ -3,9 +3,11 @@ export interface Swab {
   team_id: number;
   date: string;
   type: 'rap' | 'sier' | 'mol';
-  patient_id: number;
   done: boolean;
   positive_res: boolean;
+  name: string;
+  phone: string;
+  address: string;
 }
 export interface SwabCalendar {
   date: {
