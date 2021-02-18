@@ -1,0 +1,17 @@
+
+
+
+
+@font-face {
+  font-family: Poppins-Medium;
+  src: url('../app/components/login/fonts/poppins/Poppins-Medium.ttf'); 
+}
+
+
+* {
+font-family: Poppins-Medium;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #666666;
+}
+

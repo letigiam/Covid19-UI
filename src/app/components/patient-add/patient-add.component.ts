@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PatientsService } from 'src/app/services/patients.service';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-patient-add',
@@ -18,6 +19,9 @@ export class PatientAddComponent implements OnInit {
   constructor(private service: PatientsService) {}
 
   ngOnInit(): void {}
+
+ 
+
   postPatient = () => {
     this.service
       .addPatient(

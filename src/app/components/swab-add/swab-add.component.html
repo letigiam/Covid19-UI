@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<a
+<button
+ 
   type="button"
-  class="btn btn-primary"
+  class="btn btn-success btn-radius"
   data-bs-toggle="modal"
-  data-bs-target="#exampleModal12"
+  data-bs-target="#exampleModal13"
+  
 >
   Program a new Swab
-</a>
+</button>
 <!-- Modal -->
 <div
   class="modal fade"
-  id="exampleModal12"
+  id="exampleModal13"
   tabindex="-1"
-  aria-labelledby="exampleModalLabel12"
+  aria-labelledby="exampleModalLabel13"
   aria-hidden="true"
 >
   <div class="modal-dialog">
@@ -107,10 +109,10 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+        <button type="button" class="btn btn-secondary btn-radius" data-bs-dismiss="modal">
           Close
         </button>
-        <button type="button" class="btn btn-primary" (click)="postSwab()">
+        <button type="button" class="btn btn-success btn-radius " (click)="postSwab()">
           Save Swab
         </button>
         <br /><br />

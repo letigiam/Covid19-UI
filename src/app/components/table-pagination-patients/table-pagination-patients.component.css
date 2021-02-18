@@ -2,6 +2,23 @@ table {
     width: 100%;
 }
   
-.btn-primary{
-    background-color:#2d81b3;
+.btn-success{
+    background-color:#20aa3e;
 }
+
+
+.btn-radius{
+  border-radius: 25px;
+    font-family: Poppins-Medium;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #fff;
+  }
+
+  .btn-edit{
+      border-radius: 25px;
+    font-family: Poppins-Medium;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #fff; 
+  }

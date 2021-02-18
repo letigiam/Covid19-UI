@@ -14,6 +14,8 @@ export class TablePaginationSwabsComponent implements OnInit {
   public allSwabs: any;
   public daysSelected: string[] = [];
   public daysSelectedContent: any[] = [];
+  public swabRange: any;
+
   range = new FormGroup({
     start: new FormControl(),
     end: new FormControl(),

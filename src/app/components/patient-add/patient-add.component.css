@@ -9,3 +9,27 @@
 .example-full-width {
   width: 100%;
 }
+
+.btn-radius{
+  border-radius: 25px;
+    font-family: Poppins-Medium;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #fff;
+  }
+
+.form-control{
+    font-family: Poppins-Medium;
+    font-size: 15px;
+    line-height: 1.5;
+   
+    display: block;
+   
+    
+    height: 40px;
+    border-radius: 25px;
+    padding: 0 30px 0 68px;
+}
+
+
+
