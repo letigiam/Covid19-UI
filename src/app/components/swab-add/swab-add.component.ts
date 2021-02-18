@@ -14,8 +14,8 @@ export class SwabAddComponent implements OnInit {
   date = '';
   type = '';
   patient_id = '';
-  done = '';
-  positive_res = '';
+  done = false;
+  positive_res = false;
   time = { hour: 13, minute: 30 };
   patients: Patient[] = [];
   constructor(
@@ -27,14 +27,22 @@ export class SwabAddComponent implements OnInit {
     this.patients = await this.patientService.getAllPatients();
   }
   postSwab = () => {
+    console.log(
+      this.team_id,
+      this.date + ' ' + Object.values(this.time).join(':'),
+      this.type,
+      this.patient_id,
+      this.done,
+      this.positive_res
+    );
     this.service
       .addSwab(
         this.team_id,
         this.date + ' ' + Object.values(this.time).join(':'),
         this.type,
         this.patient_id,
-        this.done,
-        this.positive_res
+        Number(this.done),
+        Number(this.positive_res)
       )
       .subscribe(
         (Response) => {

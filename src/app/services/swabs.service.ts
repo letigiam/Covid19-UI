@@ -22,14 +22,25 @@ export class SwabsService {
         },
       })
       .toPromise();
+  allSwabsByDate = (dateStart: string, dateEnd: string) =>
+    this.httpClient
+      .get<SwabCalendar>(
+        `${this.url}?dateStart=${dateStart}&dateEnd=${dateEnd}`,
+        {
+          headers: {
+            'x-auth-token': this.localStorageService.get('token'),
+          },
+        }
+      )
+      .toPromise();
 
   addSwab = (
     team_id: string,
     date: string,
     type: string,
     patient_id: string,
-    done: string,
-    positive_res: string
+    done: number,
+    positive_res: number
   ) =>
     this.httpClient.post(
       this.url,
