@@ -1,4 +1,9 @@
 table {
-    width: 100%;
+  width: 100%;
 }
-  
+.fa-check-circle {
+  color: green;
+}
+.fa-times {
+  color: red;
+}

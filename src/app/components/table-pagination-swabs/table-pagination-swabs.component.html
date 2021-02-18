@@ -1,52 +1,24 @@
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="swabs">
-
-    <!-- Position Column -->
-    <ng-container matColumnDef="swab_id">
-      <th mat-header-cell *matHeaderCellDef> Id </th>
-      <td mat-cell *matCellDef="let swabs"> {{swabs.swab_id}} </td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="team_id">
-      <th mat-header-cell *matHeaderCellDef> Team Id </th>
-      <td mat-cell *matCellDef="let swabs"> {{swabs.team_id}} </td>
-    </ng-container>
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="date">
-      <th mat-header-cell *matHeaderCellDef> Date </th>
-      <td mat-cell *matCellDef="let swabs"> {{swabs.date}} </td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef>Type's Swabs</th>
-      <td mat-cell *matCellDef="let swabs"> {{swabs.type}} </td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="patient_id">
-      <th mat-header-cell *matHeaderCellDef> Patient Id </th>
-      <td mat-cell *matCellDef="let swabs"> {{swabs.patient_id}} </td>
-    </ng-container>
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="done">
-      <th mat-header-cell *matHeaderCellDef> Done </th>
-      <td mat-cell *matCellDef="let swabs"> {{swabs.done}} </td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="positive_res">
-      <th mat-header-cell *matHeaderCellDef> Positive Res</th>
-      <td mat-cell *matCellDef="let swabs"> {{swabs.positive_res}} </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <table class="col-12">
+    <thead class="table">
+      <tr>
+        <th *ngFor="let day of daysSelected">{{ day }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <td *ngFor="let dayContent of daysSelectedContent">
+        <div *ngFor="let swab of dayContent" class="card">
+          <h3>Team {{ swab.team_id }} - type: {{ swab.type }}</h3>
+          <p>{{ swab.date.substring(10, 16) }}</p>
+          <p>patient :{{ swab.patient_id }}</p>
+          <p>
+            Done :
+            <i
+              [ngClass]="[swab.done ? 'far fa-check-circle' : 'fas fa-times']"
+            ></i>
+          </p>
+        </div>
+      </td>
+    </tbody>
   </table>
-  
 </div>
-<br>
-<br>

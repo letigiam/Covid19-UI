@@ -1,9 +1,14 @@
-export interface Swabs {
+export interface Swab {
   swab_id: number;
   team_id: number;
   date: string;
-  type: "rap" | "sier" | "mol";
+  type: 'rap' | 'sier' | 'mol';
   patient_id: number;
   done: boolean;
   positive_res: boolean;
+}
+export interface SwabCalendar {
+  date: {
+    swabs: Swab[];
+  };
 }

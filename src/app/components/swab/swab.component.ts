@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Swabs } from 'src/app/interface/list-of-swabs';
+import { Swab } from 'src/app/interface/list-of-swabs';
 import { SwabsService } from 'src/app/services/swabs.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { SwabsService } from 'src/app/services/swabs.service';
   styleUrls: ['./swab.component.css'],
 })
 export class SwabComponent implements OnInit {
-  public swabs: Swabs[] = [];
+  public swabs: Swab[] = [];
   constructor(private swabsService: SwabsService) {}
 
   async ngOnInit() {

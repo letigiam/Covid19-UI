@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['patients']);
       },
       (error) => {
-        console.log('Error is,', error);
+        alert(error.error);
       }
     );
   };

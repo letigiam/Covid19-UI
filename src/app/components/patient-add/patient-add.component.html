@@ -1,52 +1,117 @@
 <!DOCTYPE html>
-<a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal12">
-    Add Patient
+<a
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal12"
+>
+  Add Patient
 </a>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal12" tabindex="-1" aria-labelledby="exampleModalLabel12" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel12">Patient Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Name</label>
-                        <input [(ngModel)]="name" type="text" class="form-control" id="name" >
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input [(ngModel)]="email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">dob</label>
-                        <input [(ngModel)]="dob" type="date" class="form-control" id="dob">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Fiscal Code</label>
-                        <input [(ngModel)]="fiscal_code" type="text" class="form-control" id="fiscal_code" >
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Address</label>
-                        <input [(ngModel)]="address" type="text" class="form-control" id="" >
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Phone</label>
-                        <input [(ngModel)]="phone" type="text" class="form-control" id="phone">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Has Covid</label>
-                        <input [(ngModel)]="hasCovid" type="text" class="form-control" id="hasCovid">
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" (click)="postPatient()">Save changes</button>
-                <br><br>
-                <p class="message" [hidden]="message===''">{{message}}</p>
-            </div>
+<div
+  class="modal fade"
+  id="exampleModal12"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel12"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel12">Patient Details</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Name</label>
+          <input
+            [(ngModel)]="name"
+            type="text"
+            class="form-control"
+            [ngClass]="[name.includes('ERROR') ? 'error' : '']"
+            id="name"
+          />
         </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"
+            >Email address</label
+          >
+          <input
+            [(ngModel)]="email"
+            type="email"
+            class="form-control"
+            id="email"
+            [ngClass]="[email.includes('ERROR') ? 'error' : '']"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">dob</label>
+          <input
+            [(ngModel)]="dob"
+            type="date"
+            class="form-control"
+            id="dob"
+            [ngClass]="[dob.includes('ERROR') ? 'error' : '']"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Fiscal Code</label>
+          <input
+            [(ngModel)]="fiscal_code"
+            [ngClass]="[fiscal_code.includes('ERROR') ? 'error' : '']"
+            type="text"
+            class="form-control"
+            id="fiscal_code"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Address</label>
+          <input
+            [(ngModel)]="address"
+            type="text"
+            class="form-control"
+            [ngClass]="[address.includes('ERROR') ? 'error' : '']"
+            id=""
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Phone</label>
+          <input
+            [(ngModel)]="phone"
+            [ngClass]="[phone.includes('ERROR') ? 'error' : '']"
+            type="text"
+            class="form-control"
+            id="phone"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label"
+            >Has Covid</label
+          >
+          <input
+            [(ngModel)]="hasCovid"
+            type="text"
+            class="form-control"
+            id="hasCovid"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" (click)="postPatient()">
+          Save changes
+        </button>
+        <br /><br />
+        <p class="message" [hidden]="message === ''">{{ message }}</p>
+      </div>
     </div>
+  </div>
 </div>

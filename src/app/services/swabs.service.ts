@@ -1,6 +1,7 @@
+import { SwabCalendar } from './../interface/list-of-swabs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Swabs } from '../interface/list-of-swabs';
+import { Swab } from '../interface/list-of-swabs';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
@@ -14,7 +15,7 @@ export class SwabsService {
   ) {}
   allSwabs = () =>
     this.httpClient
-      .get<Swabs[]>(this.url, {
+      .get<SwabCalendar>(this.url, {
         headers: {
           'x-auth-token': this.localStorageService.get('token'),
         },
