@@ -25,7 +25,7 @@ export class SwabsService {
   allSwabsByDate = (dateStart: string, dateEnd: string) =>
     this.httpClient
       .get<SwabCalendar>(
-        `${this.url}?dateStart=${dateStart}&dateEnd=${dateEnd}`,
+        `${this.url}?startDate=${dateStart}&endDate=${dateEnd}`,
         {
           headers: {
             'x-auth-token': this.localStorageService.get('token'),

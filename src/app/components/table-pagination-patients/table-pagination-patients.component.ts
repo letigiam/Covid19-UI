@@ -54,18 +54,16 @@ export class TablePaginationPatientsComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     this.modalService.dismissAll();
-    console.log('res:', this.editProfileForm.getRawValue());
     this.patientModified = this.editProfileForm.getRawValue();
-    console.log(this.patientModified);
-    console.log(this.patientModified.address);
     this.putPatient();
+    this.patients.push(this.patientModified);
   }
-  onDelete() {
-    console.log('ciao!!');
+  async onDelete() {
     this.delPatient();
     this.modalService.dismissAll();
+    this.patients = await this.patientsService.getAllPatients();
   }
   putPatient = () => {
     this.patientsService
@@ -93,7 +91,6 @@ export class TablePaginationPatientsComponent implements OnInit {
   }
 
   delPatient = () => {
-    console.log('Funziona?');
     this.patientsService.deletePatient(this.id_patient).subscribe(
       (Response) => {
         this.message = 'Patient Delete';

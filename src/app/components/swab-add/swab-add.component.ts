@@ -24,17 +24,10 @@ export class SwabAddComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
+    console.log('reload');
     this.patients = await this.patientService.getAllPatients();
   }
   postSwab = () => {
-    console.log(
-      this.team_id,
-      this.date + ' ' + Object.values(this.time).join(':'),
-      this.type,
-      this.patient_id,
-      this.done,
-      this.positive_res
-    );
     this.service
       .addSwab(
         this.team_id,
@@ -61,5 +54,6 @@ export class SwabAddComponent implements OnInit {
           console.log(err);
         }
       );
+    this.ngOnInit();
   };
 }
