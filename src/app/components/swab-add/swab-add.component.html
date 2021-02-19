@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <button
- 
   type="button"
   class="btn btn-success btn-radius"
   data-bs-toggle="modal"
   data-bs-target="#exampleModal13"
-  
 >
   Program a new Swab
 </button>
@@ -64,7 +62,6 @@
 
             <option value="mol">Molecular</option>
             <option value="rap">Rapid</option>
-            <option value="sier">Syerologic</option>
           </select>
         </div>
         <div class="mb-3">
@@ -109,10 +106,18 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-radius" data-bs-dismiss="modal">
+        <button
+          type="button"
+          class="btn btn-secondary btn-radius"
+          data-bs-dismiss="modal"
+        >
           Close
         </button>
-        <button type="button" class="btn btn-success btn-radius " (click)="postSwab()">
+        <button
+          type="button"
+          class="btn btn-success btn-radius"
+          (click)="postSwab()"
+        >
           Save Swab
         </button>
         <br /><br />

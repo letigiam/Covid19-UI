@@ -7,3 +7,15 @@ table {
 .fa-times {
   color: red;
 }
+.border_team1 {
+  border: 1px solid #22ff22;
+}
+.border_team2 {
+  border: 1px solid #2256ff;
+}
+.border_team3 {
+  border: 1px solid #ff8d22;
+}
+.border_team4 {
+  border: 1px solid #ff2222;
+}

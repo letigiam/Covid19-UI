@@ -14,6 +14,15 @@
   <button (click)="getSwabsByDate()">Change date</button>
   <app-swab-add></app-swab-add>
   <table class="col-12">
+    <caption class="caption">
+      <div class="m-1 col-2 border_team1">Team 1</div>
+      <div class="m-1 col-2 border_team2">Team 2</div>
+      <div class="m-1 col-2 border_team3">Team 3</div>
+      <div>
+        Rapid Swab : <i class="fas fa-registered"></i> Molecular Swab:
+        <i class="fas fa-vial"></i>
+      </div>
+    </caption>
     <thead class="table">
       <tr>
         <th *ngFor="let day of daysSelected">{{ day }}</th>
@@ -21,9 +30,18 @@
     </thead>
     <tbody>
       <td *ngFor="let dayContent of daysSelectedContent">
-        <div *ngFor="let swab of dayContent" class="card">
-          <h3>Team {{ swab.team_id }} - type: {{ swab.type }}</h3>
-          <p><i class="fas fa-clock"></i>{{ swab.date.substring(10, 16) }}</p>
+        <div
+          *ngFor="let swab of dayContent"
+          class="card border_team{{ swab.team_id }}"
+        >
+          <p>
+            <i class="fas fa-clock"></i>{{ swab.date.substring(10, 16) }} -
+            <i
+              [ngClass]="[
+                swab.type === 'rap' ? 'fas fa-registered' : 'fas fa-vial'
+              ]"
+            ></i>
+          </p>
           <p>{{ swab.name }}</p>
           <p><i class="fas fa-house-user"></i>{{ swab.address }}</p>
           <p><i class="fas fa-phone"></i>{{ swab.phone }}</p>
