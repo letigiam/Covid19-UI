@@ -33,7 +33,7 @@ export class PatientsService {
     fiscal_code: string,
     address: string,
     phone: string,
-    hasCovid: boolean
+    hasCovid: number
   ) =>
     this.httpClient.post(
       this.url,
@@ -54,7 +54,7 @@ export class PatientsService {
     address: string,
     email: string,
     phone: number,
-    hasCovid: boolean
+    hasCovid: number
   ) =>
     this.httpClient.put(
       `http://localhost:3000/patients/${id}`,

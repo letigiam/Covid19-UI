@@ -14,13 +14,11 @@ export class PatientAddComponent implements OnInit {
   fiscal_code = '';
   address = '';
   phone = '';
-  hasCovid = false;
+  hasCovid: number = 0;
   message = '';
   constructor(private service: PatientsService) {}
 
   ngOnInit(): void {}
-
- 
 
   postPatient = () => {
     this.service
@@ -31,7 +29,7 @@ export class PatientAddComponent implements OnInit {
         this.fiscal_code,
         this.address,
         this.phone,
-        this.hasCovid
+        Number(this.hasCovid)
       )
       .subscribe(
         (Response) => {

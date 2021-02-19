@@ -23,16 +23,17 @@
       <td>{{ patient.email }}</td>
       <td>{{ patient.phone }}</td>
       <td>{{ patient.hasCovid }}</td>
-      <td> <button
-        type="button"
-        class="btn btn-success btn-edit "
-        (click)="
-          openModal(editProfileModal, patient); setId(patient.patient_id)
-        "
-      >
-        Edit
-      </button></td>
-     
+      <td>
+        <button
+          type="button"
+          class="btn btn-success btn-edit"
+          (click)="
+            openModal(editProfileModal, patient); setId(patient.patient_id)
+          "
+        >
+          Edit
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -85,23 +86,17 @@
           />
         </div>
       </div>
-      <div class="form-group row">
-        <label for="hasCovid" class="col-sm-4 col-form-label">has Covid</label>
-        <div class="col-sm-8">
-          <input
-            type="text"
-            class="form-control"
-            formControlName="hasCovid"
-            id="hasCovid"
-          />
-        </div>
-        <!-- <div class="col-sm-8">
-              <select class="form-control">
-                <option value="null">Select 0 *</option>
-                <option value="true">0</option>
-                <option value="false">1</option>
-              </select>
-        </div>   -->
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          formControlName="hasCovid"
+          value=""
+          id="flexCheckDefault"
+        />
+        <label class="form-check-label" for="flexCheckDefault">
+          Has Covid
+        </label>
       </div>
       <div class="modal-footer">
         <button
@@ -111,9 +106,13 @@
         >
           Close
         </button>
-        <button type="submit" class="btn btn-success btn-radius">Save changes</button>
+        <button type="submit" class="btn btn-success btn-radius">
+          Save changes
+        </button>
       </div>
     </form>
-    <button class="btn btn-danger btn-radius" (click)="onDelete()">Delete</button>
+    <button class="btn btn-danger btn-radius" (click)="onDelete()">
+      Delete
+    </button>
   </div>
 </ng-template>

@@ -58,7 +58,6 @@ export class TablePaginationPatientsComponent implements OnInit {
     this.modalService.dismissAll();
     this.patientModified = this.editProfileForm.getRawValue();
     this.putPatient();
-    this.patients.push(this.patientModified);
   }
   async onDelete() {
     this.delPatient();
@@ -72,11 +71,12 @@ export class TablePaginationPatientsComponent implements OnInit {
         this.patientModified.address,
         this.patientModified.email,
         this.patientModified.phone,
-        this.patientModified.hasCovid
+        Number(this.patientModified.hasCovid)
       )
       .subscribe(
-        (Response) => {
+        async (Response) => {
           this.message = 'Patient Modified';
+          this.patients = await this.patientsService.getAllPatients();
         },
         (error) => {
           this.message = 'Error';
@@ -93,7 +93,7 @@ export class TablePaginationPatientsComponent implements OnInit {
   delPatient = () => {
     this.patientsService.deletePatient(this.id_patient).subscribe(
       (Response) => {
-        this.message = 'Patient Delete';
+        this.message = 'Patient Deleted';
       },
       (error) => {
         this.message = 'Error';

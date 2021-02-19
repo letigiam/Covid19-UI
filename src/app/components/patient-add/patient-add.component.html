@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-	
-		<button class=" btn btn-success btn-radius"type="button"      
-      data-bs-toggle="modal"
-      data-bs-target="#exampleModal12">
-      Add Patient
-		</button>
+
+<button
+  class="btn btn-success btn-radius"
+  type="button"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal12"
+>
+  Add Patient
+</button>
 
 <!-- Modal -->
 <div
@@ -89,23 +92,32 @@
             id="phone"
           />
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label"
-            >Has Covid</label
-          >
+        <div class="form-check">
           <input
+            class="form-check-input"
             [(ngModel)]="hasCovid"
-            type="text"
-            class="form-control"
-            id="hasCovid"
+            type="checkbox"
+            value=""
+            id="flexCheckDefault"
           />
+          <label class="form-check-label" for="flexCheckDefault">
+            Has Covid
+          </label>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-radius" data-bs-dismiss="modal">
+        <button
+          type="button"
+          class="btn btn-secondary btn-radius"
+          data-bs-dismiss="modal"
+        >
           Close
         </button>
-        <button type="button" class="btn btn-success btn-radius" (click)="postPatient()">
+        <button
+          type="button"
+          class="btn btn-success btn-radius"
+          (click)="postPatient()"
+        >
           Save changes
         </button>
         <br /><br />
