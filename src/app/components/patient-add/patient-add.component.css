@@ -27,6 +27,11 @@
     border-radius: 25px;
     padding: 0 30px 0 68px;
 }
+.form-check{
+  padding-left: 0px;
+}
 
-
-
+.form-check-input{
+  margin-left: 20px;
+  margin-top: 9px;
+}
