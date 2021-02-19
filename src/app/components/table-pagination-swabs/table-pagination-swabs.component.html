@@ -116,7 +116,6 @@
           class="form-control"
           id="date"
         />
-        <ngb-timepicker id="time" formControlName="time"></ngb-timepicker>
       </div>
       <div class="modal-footer">
         <button
@@ -131,6 +130,8 @@
         </button>
       </div>
     </form>
+    <ngb-timepicker [(ngModel)]="time"></ngb-timepicker>
+
     <h1>{{ message }}</h1>
 
     <button class="btn btn-danger btn-radius" (click)="onDelete()">

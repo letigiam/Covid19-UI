@@ -103,7 +103,9 @@ export class TablePaginationSwabsComponent implements OnInit {
       const res = await this.swabsService.updateSwab(
         this.swabToUpdate.swab_id,
         this.editSwabForm.getRawValue().team_id,
-        this.editSwabForm.getRawValue().date,
+        this.editSwabForm.getRawValue().date +
+          ' ' +
+          Object.values(this.time).join(':'),
         this.editSwabForm.getRawValue().type,
         this.swabToUpdate.patient_id,
         Number(this.editSwabForm.getRawValue().done),
