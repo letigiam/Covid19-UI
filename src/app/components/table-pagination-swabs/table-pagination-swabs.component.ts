@@ -21,12 +21,12 @@ export class TablePaginationSwabsComponent implements OnInit {
     start: new FormControl(),
     end: new FormControl(),
   });
-
+  message!: string;
   startDate!: Date;
   endDate!: Date;
-
+  swabToUpdate!: Swab;
   time = { hour: 13, minute: 30 };
-  editProfileForm: any;
+  editSwabForm: any;
   constructor(
     private swabsService: SwabsService,
     private router: Router,
@@ -48,90 +48,71 @@ export class TablePaginationSwabsComponent implements OnInit {
       (i) => moment(i).format('dddd') + ' ' + moment(i).format('DD-MM')
     );
     this.daysSelectedContent = Object.values(this.allSwabs);
-    this.editProfileForm = this.fb.group({
-      address: [''],
-      email: [''],
-      phone: [''],
-      hasCovid: [''],
+    this.editSwabForm = this.fb.group({
+      date: [''],
+      done: [''],
+      type: [''],
+      time: [''],
+      team_id: [''],
     });
   }
   getSwabsByDate = async () => {
-    var ds= new Date( this.range.value.start);
-    var dstostring= moment(ds).format('YYYY-MM-DD');
-    var ed= new Date(this.range.value.end);
-    var edtostring= moment(ed).format('YYYY-MM-DD');
+    var ds = new Date(this.range.value.start);
+    var dstostring = moment(ds).format('YYYY-MM-DD');
+    var ed = new Date(this.range.value.end);
+    var edtostring = moment(ed).format('YYYY-MM-DD');
 
     this.allSwabs = await this.swabsService.allSwabsByDate(
-      dstostring, edtostring
+      dstostring,
+      edtostring
     );
-    console.log(this.allSwabs)
     this.daysSelected = Object.keys(this.allSwabs).map(
       (i) => moment(i).format('dddd') + ' ' + moment(i).format('DD-MM')
     );
-    console.log(this.daysSelected)
     this.daysSelectedContent = Object.values(this.allSwabs);
-    console.log(this.daysSelectedContent)
   };
-
-  // openModal(targetModal: any, swab: Swab) {
-  //   this.modalService.open(targetModal, {
-  //     centered: true,
-  //     backdrop: 'static',
-  //   });
-
-  //   this.editProfileForm.patchValue({
-  //     patient,
-  //     email: patient.email,
-  //     phone: patient.phone,
-  //     hasCovid: patient.hasCovid,
-  //   });
-  // }
-
-  // async onSubmit() {
-  //   this.modalService.dismissAll();
-  //   this.patientModified = this.editProfileForm.getRawValue();
-  //   this.putPatient();
-  // }
-  // async onDelete() {
-  //   this.delPatient();
-  //   this.modalService.dismissAll();
-  //   this.patients = await this.patientsService.getAllPatients();
-  // }
-  // putPatient = () => {
-  //   this.patientsService
-  //     .putPatient(
-  //       this.id_patient,
-  //       this.patientModified.address,
-  //       this.patientModified.email,
-  //       this.patientModified.phone,
-  //       Number(this.patientModified.hasCovid)
-  //     )
-  //     .subscribe(
-  //       async (Response) => {
-  //         this.message = 'Patient Modified';
-  //         this.patients = await this.patientsService.getAllPatients();
-  //       },
-  //       (error) => {
-  //         this.message = 'Error';
-  //         console.log('Error is, ', error);
-  //       }
-  //     );
-  // };
-
-  // setId(patient_id: string) {
-  //   console.log(patient_id);
-  //   this.id_patient = patient_id;
-  // }
-
-  // delSwab = () => {
-  //   this.patientsService.deletePatient(this.id_patient).subscribe(
-  //     (Response) => {
-  //       this.message = 'Patient Deleted';
-  //     },
-  //     (error) => {
-  //       this.message = 'Error';
-  //       console.log('Error is, ', error);
-  //     }
-  //   );
-  // };
+  openModal(targetModal: any, swab: Swab) {
+    console.log(swab.swab_id);
+    this.swabToUpdate = swab;
+    this.modalService.open(targetModal, {
+      centered: true,
+      backdrop: 'static',
+    });
+    console.log(swab.date.substr(11, 16));
+    this.editSwabForm.patchValue({
+      team_id: swab.team_id,
+      date: swab.date.substr(0, 10),
+      // time: swab.date.substr(11, 14), NON FUNZIONA
+      type: swab.type,
+      done: swab.done,
+    });
+  }
+  async onDelete() {
+    try {
+      await this.swabsService.deleteSwab(this.swabToUpdate.swab_id);
+      this.message = 'Swab deleted';
+      this.modalService.dismissAll();
+      await this.getSwabsByDate();
+    } catch (error) {
+      console.log(error);
+      this.message = 'Error';
+    }
+  }
+  async onSubmit() {
+    try {
+      const res = await this.swabsService.updateSwab(
+        this.swabToUpdate.swab_id,
+        this.editSwabForm.getRawValue().team_id,
+        this.editSwabForm.getRawValue().date,
+        this.editSwabForm.getRawValue().type,
+        this.swabToUpdate.patient_id,
+        Number(this.editSwabForm.getRawValue().done),
+        Number(this.swabToUpdate.positive_res)
+      );
+    } catch (error) {
+      console.log(error);
+    }
+    this.modalService.dismissAll();
+    await this.getSwabsByDate();
+  }
 }

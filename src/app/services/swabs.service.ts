@@ -58,4 +58,39 @@ export class SwabsService {
         },
       }
     );
+  updateSwab = (
+    swab_id: number,
+    team_id: number,
+    date: string,
+    type: string,
+    patient_id: string,
+    done: number,
+    positive_res: number
+  ) =>
+    this.httpClient
+      .put(
+        `${this.url}/${swab_id}`,
+        {
+          team_id,
+          date,
+          type,
+          patient_id,
+          done,
+          positive_res,
+        },
+        {
+          headers: {
+            'x-auth-token': this.localStorageService.get('token'),
+          },
+        }
+      )
+      .toPromise();
+  deleteSwab = (swab_id: number) =>
+    this.httpClient
+      .delete(`${this.url}/${swab_id}`, {
+        headers: {
+          'x-auth-token': this.localStorageService.get('token'),
+        },
+      })
+      .toPromise();
 }

@@ -8,6 +8,7 @@ export interface Swab {
   name: string;
   phone: string;
   address: string;
+  patient_id: string;
 }
 export interface SwabCalendar {
   date: {

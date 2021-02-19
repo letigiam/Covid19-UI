@@ -11,7 +11,9 @@
 
     <mat-date-range-picker #picker></mat-date-range-picker>
   </mat-form-field>
-  <button (click)="getSwabsByDate()" class="btn btn-success btn-radius">Change date</button>
+  <button (click)="getSwabsByDate()" class="btn btn-success btn-radius">
+    Change date
+  </button>
   <app-swab-add></app-swab-add>
   <table class="col-12">
     <caption class="caption">
@@ -33,6 +35,7 @@
         <div
           *ngFor="let swab of dayContent"
           class="card border_team{{ swab.team_id }}"
+          (click)="openModal(editSwabModal, swab)"
         >
           <p>
             <i class="fas fa-clock"></i>{{ swab.date.substring(10, 16) }} -
@@ -56,3 +59,82 @@
     </tbody>
   </table>
 </div>
+<ng-template #editSwabModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="editProfileLabel">Edit Swab</h5>
+    <button
+      type="button"
+      class="close"
+      (click)="modal.dismiss()"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]="editSwabForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <select
+          formControlName="team_id"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option value="" selected disabled>Team</option>
+          <option value="1">Pappalardo - Sambataro</option>
+          <option value="2">Zappulla - Troina</option>
+          <option value="3">Prestifilippo - Del Pozzo</option>
+        </select>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label" for="done"> Done </label>
+        <input
+          class="form-check-input"
+          type="checkbox"
+          formControlName="done"
+          value=""
+          id="flexCheckDefault"
+        />
+      </div>
+      <div class="mb-3">
+        <select
+          formControlName="type"
+          class="form-select"
+          aria-label="swab type"
+        >
+          <option value="" selected disabled>Swab type</option>
+
+          <option value="mol">Molecular</option>
+          <option value="rap">Rapid</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="date" class="form-label">Date and time</label>
+        <input
+          formControlName="date"
+          type="date"
+          class="form-control"
+          id="date"
+        />
+        <ngb-timepicker id="time" formControlName="time"></ngb-timepicker>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary btn-radius"
+          (click)="modal.dismiss()"
+        >
+          Close
+        </button>
+        <button type="submit" class="btn btn-success btn-radius">
+          Save changes
+        </button>
+      </div>
+    </form>
+    <h1>{{ message }}</h1>
+
+    <button class="btn btn-danger btn-radius" (click)="onDelete()">
+      Delete
+    </button>
+  </div>
+</ng-template>
