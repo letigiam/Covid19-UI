@@ -7,3 +7,10 @@ table {
 .fa-times {
   color: red;
 }
+.btn-radius{
+  border-radius: 25px;
+    font-family: Poppins-Medium;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #fff;
+  }
