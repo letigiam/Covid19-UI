@@ -49,20 +49,23 @@ export class PatientsService {
       { headers: { 'x-auth-token': this.localStorageService.get('token') } }
     );
 
-  putPatient = (
-    id: string,
+  updatePatient = (
+    id: number,
+    name: string,
     address: string,
     email: string,
     phone: number,
-    hasCovid: number
+    hasCovid: number,
+    dob: string,
+    fiscal_code: string
   ) =>
     this.httpClient.put(
       `http://localhost:3000/patients/${id}`,
-      { address, email, phone, hasCovid },
+      { name, address, email, phone, hasCovid, dob, fiscal_code },
       { headers: { 'x-auth-token': this.localStorageService.get('token') } }
     );
 
-  deletePatient = (id: string) =>
+  deletePatient = (id: number) =>
     this.httpClient.delete<Patient>(`http://localhost:3000/patients/${id}`, {
       headers: { 'x-auth-token': this.localStorageService.get('token') },
     });

@@ -1,9 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Patient } from 'src/app/interface/list-of-patients';
 import { PatientsService } from 'src/app/services/patients.service';
-import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-table-pagination-patients',
@@ -11,19 +10,11 @@ import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
   styleUrls: ['./table-pagination-patients.component.css'],
 })
 export class TablePaginationPatientsComponent implements OnInit {
-  @Input() patient_id!: string;
   public patients: any;
   editProfileForm!: FormGroup;
-  public id_patient = '';
-  email = '';
-  address = '';
-  phone = 0;
-  hasCovid = false;
-  message = '';
-  public patientModified: any;
-
+  patient!: Patient;
+  message!: string;
   constructor(
-    private route: ActivatedRoute,
     private patientsService: PatientsService,
     private modalService: NgbModal,
     private fb: FormBuilder
@@ -45,7 +36,7 @@ export class TablePaginationPatientsComponent implements OnInit {
       centered: true,
       backdrop: 'static',
     });
-
+    this.patient = patient;
     this.editProfileForm.patchValue({
       address: patient.address,
       email: patient.email,
@@ -56,22 +47,17 @@ export class TablePaginationPatientsComponent implements OnInit {
 
   async onSubmit() {
     this.modalService.dismissAll();
-    this.patientModified = this.editProfileForm.getRawValue();
-    this.putPatient();
-  }
-  async onDelete() {
-    this.delPatient();
-    this.modalService.dismissAll();
-    this.patients = await this.patientsService.getAllPatients();
-  }
-  putPatient = () => {
+    console.log(typeof this.patient.dob, this.editProfileForm.getRawValue());
     this.patientsService
-      .putPatient(
-        this.id_patient,
-        this.patientModified.address,
-        this.patientModified.email,
-        this.patientModified.phone,
-        Number(this.patientModified.hasCovid)
+      .updatePatient(
+        this.patient.patient_id,
+        this.patient.name,
+        this.editProfileForm.getRawValue().address,
+        this.editProfileForm.getRawValue().email,
+        this.editProfileForm.getRawValue().phone,
+        Number(this.editProfileForm.getRawValue().hasCovid),
+        this.patient.dob,
+        this.patient.fiscal_code
       )
       .subscribe(
         async (Response) => {
@@ -83,15 +69,9 @@ export class TablePaginationPatientsComponent implements OnInit {
           console.log('Error is, ', error);
         }
       );
-  };
-
-  setId(patient_id: string) {
-    console.log(patient_id);
-    this.id_patient = patient_id;
   }
-
-  delPatient = () => {
-    this.patientsService.deletePatient(this.id_patient).subscribe(
+  async onDelete() {
+    this.patientsService.deletePatient(this.patient.patient_id).subscribe(
       (Response) => {
         this.message = 'Patient Deleted';
       },
@@ -100,5 +80,7 @@ export class TablePaginationPatientsComponent implements OnInit {
         console.log('Error is, ', error);
       }
     );
-  };
+    this.modalService.dismissAll();
+    this.patients = await this.patientsService.getAllPatients();
+  }
 }
