@@ -56,14 +56,21 @@ export class TablePaginationSwabsComponent implements OnInit {
     });
   }
   getSwabsByDate = async () => {
+    var ds= new Date( this.range.value.start);
+    var dstostring= moment(ds).format('YYYY-MM-DD');
+    var ed= new Date(this.range.value.end);
+    var edtostring= moment(ed).format('YYYY-MM-DD');
+
     this.allSwabs = await this.swabsService.allSwabsByDate(
-      moment(String(this.startDate).substr(0, 16)).format('YYYY-MM-DD'),
-      moment(String(this.endDate).substr(0, 16)).format('YYYY-MM-DD')
+      dstostring, edtostring
     );
+    console.log(this.allSwabs)
     this.daysSelected = Object.keys(this.allSwabs).map(
       (i) => moment(i).format('dddd') + ' ' + moment(i).format('DD-MM')
     );
+    console.log(this.daysSelected)
     this.daysSelectedContent = Object.values(this.allSwabs);
+    console.log(this.daysSelectedContent)
   };
 
   // openModal(targetModal: any, swab: Swab) {

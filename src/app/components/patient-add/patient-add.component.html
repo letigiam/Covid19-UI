@@ -1,123 +1,80 @@
 <!DOCTYPE html>
 
-<button
-  class="btn btn-success btn-radius"
-  type="button"
-  data-bs-toggle="modal"
-  data-bs-target="#exampleModal12"
->
+<button class="btn btn-success btn-radius" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal12">
   Add Patient
 </button>
 
 <!-- Modal -->
-<div
-  class="modal fade"
-  id="exampleModal12"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel12"
-  aria-hidden="true"
->
+<div class="modal fade" id="exampleModal12" tabindex="-1" aria-labelledby="exampleModalLabel12" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel12">Patient Details</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Name</label>
-          <input
-            [(ngModel)]="name"
-            type="text"
-            class="form-control"
-            [ngClass]="[name.includes('ERROR') ? 'error' : '']"
-            id="name"
-          />
+        <div class="form-group row">
+          <label for="exampleInputEmail1" class="col-sm-4 col-form-label">Name</label>
+          <div class="col-sm-8">
+            <input [(ngModel)]="name" type="text" class="form-control"
+              [ngClass]="[name.includes('ERROR') ? 'error' : '']" id="name" />
+          </div>
+
         </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
-            >Email address</label
-          >
-          <input
-            [(ngModel)]="email"
-            type="email"
-            class="form-control"
-            id="email"
-            [ngClass]="[email.includes('ERROR') ? 'error' : '']"
-            aria-describedby="emailHelp"
-          />
+        <div class="form-group row">
+          <label for="exampleInputEmail1" class="col-sm-4 col-form-label">Email address</label>
+          <div class="col-sm-8">
+            <input [(ngModel)]="email" type="email" class="form-control" id="email"
+              [ngClass]="[email.includes('ERROR') ? 'error' : '']" aria-describedby="emailHelp" />
+          </div>
+
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">dob</label>
-          <input
-            [(ngModel)]="dob"
-            type="date"
-            class="form-control"
-            id="dob"
-            [ngClass]="[dob.includes('ERROR') ? 'error' : '']"
-          />
+        <div class="form-group row">
+          <label for="exampleInputPassword1" class="col-sm-4 col-form-label">dob</label>
+          <div class="col-sm-8">
+            <input [(ngModel)]="dob" type="date" class="form-control" id="dob"
+              [ngClass]="[dob.includes('ERROR') ? 'error' : '']" />
+          </div>
+
         </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Fiscal Code</label>
-          <input
-            [(ngModel)]="fiscal_code"
-            [ngClass]="[fiscal_code.includes('ERROR') ? 'error' : '']"
-            type="text"
-            class="form-control"
-            id="fiscal_code"
-          />
+        <div class="form-group row">
+          <label for="exampleInputEmail1" class="col-sm-4 col-form-label">Fiscal Code</label>
+          <div class="col-sm-8">
+            <input [(ngModel)]="fiscal_code" [ngClass]="[fiscal_code.includes('ERROR') ? 'error' : '']" type="text"
+              class="form-control" id="fiscal_code" />
+          </div>
+
         </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Address</label>
-          <input
-            [(ngModel)]="address"
-            type="text"
-            class="form-control"
-            [ngClass]="[address.includes('ERROR') ? 'error' : '']"
-            id=""
-          />
+        <div class="form-group row">
+          <label for="exampleInputEmail1" class="col-sm-4 col-form-label">Address</label>
+          <div class="col-sm-8">
+            <input [(ngModel)]="address" type="text" class="form-control"
+              [ngClass]="[address.includes('ERROR') ? 'error' : '']" id="" />
+          </div>
+
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Phone</label>
-          <input
-            [(ngModel)]="phone"
-            [ngClass]="[phone.includes('ERROR') ? 'error' : '']"
-            type="text"
-            class="form-control"
-            id="phone"
-          />
+        <div class="form-group row">
+          <label for="exampleInputPassword1" class="col-sm-4 col-form-label">Phone</label>
+          <div class="col-sm-8">
+            <input [(ngModel)]="phone" [ngClass]="[phone.includes('ERROR') ? 'error' : '']" type="text"
+              class="form-control" id="phone" />
+          </div>
+
         </div>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            [(ngModel)]="hasCovid"
-            type="checkbox"
-            value=""
-            id="flexCheckDefault"
-          />
-          <label class="form-check-label" for="flexCheckDefault">
-            Has Covid
-          </label>
+        <div class="form-group row">
+          <div class="form-check">
+            <label class="col-sm-4 col-form-label" for="flexCheckDefault">
+              Has Covid
+            </label>
+            <input class="form-check-input" [(ngModel)]="hasCovid" type="checkbox" value="" id="flexCheckDefault" />
+          </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary btn-radius"
-          data-bs-dismiss="modal"
-        >
+        <button type="button" class="btn btn-secondary btn-radius" data-bs-dismiss="modal">
           Close
         </button>
-        <button
-          type="button"
-          class="btn btn-success btn-radius"
-          (click)="postPatient()"
-        >
+        <button type="button" class="btn btn-success btn-radius" (click)="postPatient()">
           Save changes
         </button>
         <br /><br />

@@ -19,3 +19,10 @@ table {
 .border_team4 {
   border: 1px solid #ff2222;
 }
+.btn-radius {
+  border-radius: 25px;
+  font-family: Poppins-Medium;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #fff;
+}
