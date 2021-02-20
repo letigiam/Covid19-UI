@@ -12,50 +12,6 @@ import { Swab } from 'src/app/interface/list-of-swabs';
   styleUrls: ['./swab-add.component.css'],
 })
 export class SwabAddComponent implements OnInit {
- /*
-  message = '';
-  team_id = '';
-  date = '';
-  type = '';
-  patient_id = '';
-  done = false;
-  positive_res = false;
-  time = { hour: 13, minute: 30 };
-  patients: Patient[] = [];
-  constructor(
-    private service: SwabsService,
-    private patientService: PatientsService
-  ) {}
-
-  async ngOnInit() {
-    this.patients = await this.patientService.getAllPatients();
-  }
-  postSwab = () => {
-    try {
-      this.service.addSwab(
-        this.team_id,
-        this.date + ' ' + Object.values(this.time).join(':'),
-        this.type,
-        this.patient_id,
-        Number(this.done),
-        Number(this.positive_res)
-      );
-      this.message = 'Swab added succesfully';
-    } catch (err) {
-      if (err.error.errors) {
-        err.error.errors.forEach((item: {}) => {
-          (<any>this)[Object.keys(item)[0]] = 'ERROR ' + Object.values(item)[0];
-        });
-      } else {
-        alert('ERROR ' + err.error);
-      }
-      this.message = 'Error';
-      console.log(err);
-    }
-    alert(this.message);
-  };
-  */
-
   message = '';
   team_id = '';
   date = '';
@@ -67,15 +23,15 @@ export class SwabAddComponent implements OnInit {
   patients: Patient[] = [];
   swabAddForm!: FormGroup;
 
-   constructor(
+  constructor(
     private swabsService: SwabsService,
     private patientsService: PatientsService,
     private modalService: NgbModal,
     private fb: FormBuilder
   ) {}
 
-  async ngOnInit(){
-     this.patients = await this.patientsService.getAllPatients();
+  async ngOnInit() {
+    this.patients = await this.patientsService.getAllPatients();
     this.swabAddForm = this.fb.group({
       team: [''],
       date: [''],
@@ -93,7 +49,7 @@ export class SwabAddComponent implements OnInit {
     });
   }
 
-    async onSubmit() {
+  async onSubmit() {
     try {
       this.swabsService.addSwab(
         this.team_id,
@@ -117,9 +73,4 @@ export class SwabAddComponent implements OnInit {
     }
     alert(this.message);
   }
-
 }
-
-
-
-

@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { PatientsComponent } from './components/patients/patients.component';
 import { SwabComponent } from './components/swab/swab.component';
-import { TablePaginationPatientsComponent } from './components/table-pagination-patients/table-pagination-patients.component';
+import { patientsTableComponent } from './components/patientsTable/patientsTable.component';
 import { MatInputModule } from '@angular/material/input';
 
 import { CalendarComponent } from './components/calendar/calendar.component';
@@ -17,11 +17,14 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TablePaginationSwabsComponent } from './components/table-pagination-swabs/table-pagination-swabs.component';
+import { swabsTableComponent } from './components/swabsTable/swabsTable.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PatientAddComponent } from './components/patient-add/patient-add.component';
 import { LoginComponent } from './components/login/login.component';
-import {  NgbPaginationModule,  NgbAlertModule,} from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbPaginationModule,
+  NgbAlertModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import { SwabAddComponent } from './components/swab-add/swab-add.component';
 import { LogoutComponent } from './components/logout/logout.component';
 
@@ -31,9 +34,9 @@ import { LogoutComponent } from './components/logout/logout.component';
     NavbarComponent,
     PatientsComponent,
     SwabComponent,
-    TablePaginationPatientsComponent,
+    patientsTableComponent,
     CalendarComponent,
-    TablePaginationSwabsComponent,
+    swabsTableComponent,
     PatientAddComponent,
     LoginComponent,
     SwabAddComponent,

@@ -12,7 +12,6 @@
     <mat-date-range-picker #picker></mat-date-range-picker>
   </mat-form-field>
 
-  <app-swab-add></app-swab-add>
   <select
     class="form-select"
     aria-label="Default select example"
@@ -34,6 +33,12 @@
     <option value="2">Zappulla - Troina</option>
     <option value="3">Prestifilippo - Del Pozzo</option>
   </select>
+  <button
+    class="btn btn-success btn-radius"
+    (click)="openModal(swabModal, 'post')"
+  >
+    Program new Swab
+  </button>
   <table class="col-12">
     <caption class="caption">
       <div class="m-1 col-2 border_team1">Team 1</div>
@@ -54,7 +59,7 @@
         <div
           *ngFor="let swab of dayContent"
           class="card border_team{{ swab.team_id }}"
-          (click)="openModal(editSwabModal, swab)"
+          (click)="openModal(swabModal, 'update', swab)"
         >
           <p>
             <i class="fas fa-clock"></i>{{ swab.date.substring(10, 16) }} -
@@ -78,7 +83,133 @@
     </tbody>
   </table>
 </div>
-<ng-template #editSwabModal let-modal>
+<ng-template #swabModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="modalLabel">{{ action }} Swab</h5>
+    <button
+      type="button"
+      class="close"
+      (click)="modal.dismiss()"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]="swabForm">
+      <div class="form-group row">
+        <label for="team" class="col-sm-4 col-form-label">Team</label>
+        <div class="col-sm-8">
+          <select
+            formControlName="team_id"
+            class="form-select"
+            aria-label="Default select example"
+          >
+            <option value="" selected disabled>Team</option>
+            <option value="1">Pappalardo - Sambataro</option>
+            <option value="2">Zappulla - Troina</option>
+            <option value="3">Prestifilippo - Del Pozzo</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="date" class="col-sm-4 col-form-label">Date and Time</label>
+        <div class="col-sm-8">
+          <input
+            formControlName="date"
+            type="date"
+            class="form-control"
+            id="date"
+            [ngClass]="[swabToUpdate.date.includes('ERROR') ? 'error' : '']"
+          />
+        </div>
+        <div>
+          <ngb-timepicker
+            [(ngModel)]="time"
+            [ngModelOptions]="{ standalone: true }"
+          ></ngb-timepicker>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="swab" class="col-sm-4 col-form-label">Swab Type</label>
+        <div class="col-sm-8">
+          <select
+            formControlName="type"
+            class="form-select"
+            aria-label="swab type"
+          >
+            <option value="" selected disabled>Swab type</option>
+
+            <option value="mol">Molecular</option>
+            <option value="rap">Rapid</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row" *ngIf="action === 'post'">
+        <label for="patient" class="col-sm-4 col-form-label">Patient</label>
+        <div class="col-sm-8">
+          <select
+            class="form-select"
+            aria-label="patient"
+            formControlName="patient_id"
+            placeholder="Select a patient"
+          >
+            <option value="" selected disabled>Patient</option>
+
+            <option
+              *ngFor="let patient of patients"
+              value="{{ patient.patient_id }}"
+            >
+              {{ patient.name }} - {{ patient.fiscal_code }}
+            </option>
+          </select>
+        </div>
+        <app-patient-add (emitter)="updatePatients()"></app-patient-add>
+      </div>
+      <div class="form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="alreadyDone"
+          value=""
+        />
+        <label for="alreadyDone" class="form-check-label">Already Done</label>
+      </div>
+      <div class="form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="positive_res"
+          value=""
+        />
+        <label for="positive_res" class="form-check-label"
+          >Positive Result</label
+        >
+      </div>
+      <div class="modal-footer">
+        <button
+          *ngIf="action === 'update'"
+          class="btn btn-danger btn-radius"
+          (click)="onDelete()"
+        >
+          Delete
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary btn-radius"
+          (click)="modal.dismiss()"
+        >
+          Close
+        </button>
+        <button (click)="submitSwab()" class="btn btn-success btn-radius">
+          Save changes
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<!-- <ng-template #editSwabModal let-modal>
   <div class="modal-header">
     <h5 class="modal-title" id="editProfileLabel">Edit Swab</h5>
     <button
@@ -157,4 +288,4 @@
       Delete
     </button>
   </div>
-</ng-template>
+</ng-template> -->

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Patient } from 'src/app/interface/list-of-patients';
 import { PatientsService } from 'src/app/services/patients.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-patient-add',
@@ -11,6 +11,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
   styleUrls: ['./patient-add.component.css'],
 })
 export class PatientAddComponent implements OnInit {
+  @Output() emitter: EventEmitter<boolean> = new EventEmitter();
   name = '';
   email = '';
   dob = '';
@@ -19,16 +20,15 @@ export class PatientAddComponent implements OnInit {
   phone = '';
   hasCovid: number = 0;
   message = '';
-  addPatientForm!:FormGroup;
-  picker="";
-   constructor(
+  addPatientForm!: FormGroup;
+  picker = '';
+  constructor(
     private patientsService: PatientsService,
     private modalService: NgbModal,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-
     this.addPatientForm = this.fb.group({
       name: [''],
       email: [''],
@@ -39,17 +39,14 @@ export class PatientAddComponent implements OnInit {
       hasCovid: [''],
     });
   }
-openModal(targetModal: any) {
+  openModal(targetModal: any) {
     this.modalService.open(targetModal, {
       centered: true,
       backdrop: 'static',
     });
-}
+  }
 
-async onSubmit() {
-  console.log("dob:",this.addPatientForm.getRawValue().dob)
-  console.log("picker:",this.picker)
-  console.log("dob:",this.addPatientForm.getRawValue().name)
+  async onSubmit() {
     this.patientsService
       .addPatient(
         this.addPatientForm.getRawValue().name,
@@ -58,11 +55,12 @@ async onSubmit() {
         this.addPatientForm.getRawValue().fiscal_code,
         this.addPatientForm.getRawValue().address,
         this.addPatientForm.getRawValue().phone,
-        this.addPatientForm.getRawValue().hasCovid,
+        Number(this.addPatientForm.getRawValue().hasCovid)
       )
       .subscribe(
         (Response) => {
-          this.message = 'Paziente Registrato Correttamente';
+          alert('Patient registered');
+          this.emitter.emit(true);
         },
         (err) => {
           if (err.error.errors) {
@@ -73,10 +71,8 @@ async onSubmit() {
           } else {
             alert('ERROR ' + err.error);
           }
-          this.message = 'Errore durante la registrazione';
           console.log(err);
         }
       );
-    console.log(this.addPatientForm.getRawValue().dob)
-  };
+  }
 }

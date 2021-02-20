@@ -132,7 +132,7 @@
   class="btn btn-success btn-edit"
   (click)="openModal(swabAddModal)"
 >
-Program Swab
+  Program Swab
 </button>
 <ng-template #swabAddModal let-modal>
   <div class="modal-header">
@@ -148,55 +148,59 @@ Program Swab
   </div>
 
   <div class="modal-body">
-    <form [formGroup]="swabAddForm" (ngSubmit)="onSubmit()" >
+    <form [formGroup]="swabAddForm" (ngSubmit)="onSubmit()">
       <div class="form-group row">
         <label for="team" class="col-sm-4 col-form-label">Team</label>
         <div class="col-sm-8">
           <select
-          formControlName="team"
-          class="form-select"
-          aria-label="Default select example"
-          
-        >
-          <option value="" selected disabled>Team</option>
-          <option value="1">Pappalardo - Sambataro</option>
-          <option value="2">Zappulla - Troina</option>
-          <option value="3">Prestifilippo - Del Pozzo</option>
-        </select>
+            formControlName="team"
+            class="form-select"
+            aria-label="Default select example"
+          >
+            <option value="" selected disabled>Team</option>
+            <option value="1">Pappalardo - Sambataro</option>
+            <option value="2">Zappulla - Troina</option>
+            <option value="3">Prestifilippo - Del Pozzo</option>
+          </select>
         </div>
       </div>
       <div class="form-group row">
         <label for="date" class="col-sm-4 col-form-label">Date and Time</label>
-        <div class="col-sm-8">                
-            <input
-              
-              type="date"
-              class="form-control"
-              id="date"
-              [ngClass]="[date.includes('ERROR') ? 'error' : '']"
-            />
-         </div>
-         <div><ngb-timepicker [(ngModel)]="time" [ngModelOptions]="{standalone: true}"></ngb-timepicker></div>
+        <div class="col-sm-8">
+          <input
+            formControlName="date"
+            type="date"
+            class="form-control"
+            id="date"
+            [ngClass]="[date.includes('ERROR') ? 'error' : '']"
+          />
+        </div>
+        <div>
+          <ngb-timepicker
+            [(ngModel)]="time"
+            [ngModelOptions]="{ standalone: true }"
+          ></ngb-timepicker>
+        </div>
       </div>
       <div class="form-group row">
         <label for="swab" class="col-sm-4 col-form-label">Swab Type</label>
         <div class="col-sm-8">
           <select
-          formControlName="swabType"
-          class="form-select"
-          aria-label="swab type"
-        >
-          <option value="" selected disabled>Swab type</option>
+            formControlName="swabType"
+            class="form-select"
+            aria-label="swab type"
+          >
+            <option value="" selected disabled>Swab type</option>
 
-          <option value="mol">Molecular</option>
-          <option value="rap">Rapid</option>
-        </select>
+            <option value="mol">Molecular</option>
+            <option value="rap">Rapid</option>
+          </select>
         </div>
       </div>
       <div class="form-group row">
         <label for="patient" class="col-sm-4 col-form-label">Patient</label>
         <div class="col-sm-8">
-         <select            
+          <select
             class="form-select"
             aria-label="patient"
             [ngClass]="[patient_id.includes('ERROR') ? 'error' : '']"
@@ -213,27 +217,25 @@ Program Swab
           </select>
         </div>
       </div>
-       <div class="form-check">
-          <input
-            
-            type="checkbox"
-            class="form-check-input"
-            id="alreadyDone"
-            value=""
-          />
-          <label for="alreadyDone" class="form-check-label">Already Done</label>
-        </div>
-        <div class="form-check">
-          <input
-           
-            type="checkbox"
-            class="form-check-input"
-            id="positive_res"
-            value=""
-          />
-          <label for="positive_res" class="form-check-label"
-            >Positive Result</label
-          >
+      <div class="form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="alreadyDone"
+          value=""
+        />
+        <label for="alreadyDone" class="form-check-label">Already Done</label>
+      </div>
+      <div class="form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="positive_res"
+          value=""
+        />
+        <label for="positive_res" class="form-check-label"
+          >Positive Result</label
+        >
       </div>
       <app-patient-add></app-patient-add>
       <div class="modal-footer">
@@ -249,7 +251,5 @@ Program Swab
         </button>
       </div>
     </form>
-   
   </div>
 </ng-template>
-

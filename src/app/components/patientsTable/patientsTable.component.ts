@@ -5,11 +5,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-table-pagination-patients',
-  templateUrl: './table-pagination-patients.component.html',
-  styleUrls: ['./table-pagination-patients.component.css'],
+  selector: 'app-patientsTable',
+  templateUrl: './patientsTable.component.html',
+  styleUrls: ['./patientsTable.component.css'],
 })
-export class TablePaginationPatientsComponent implements OnInit {
+export class patientsTableComponent implements OnInit {
   public patients: any;
   editProfileForm!: FormGroup;
   patient!: Patient;
@@ -30,7 +30,9 @@ export class TablePaginationPatientsComponent implements OnInit {
       hasCovid: [''],
     });
   }
-
+  updatePatients = async () => {
+    this.patients = await this.patientsService.getAllPatients();
+  };
   openModal(targetModal: any, patient: Patient) {
     this.modalService.open(targetModal, {
       centered: true,
