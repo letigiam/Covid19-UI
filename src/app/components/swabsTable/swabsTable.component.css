@@ -7,7 +7,15 @@ table {
 .fa-times {
   color: red;
 }
+
+.table-swab{
+  height:800px;
+  width:1000px;
+}
+
+
 .card {
+  min-width:200px;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(6.5px);
   -webkit-backdrop-filter: blur(6.5px);
