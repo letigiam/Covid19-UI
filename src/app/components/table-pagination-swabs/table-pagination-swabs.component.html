@@ -11,10 +11,29 @@
 
     <mat-date-range-picker #picker></mat-date-range-picker>
   </mat-form-field>
-  <button (click)="getSwabsByDate()" class="btn btn-success btn-radius">
-    Change date
-  </button>
+
   <app-swab-add></app-swab-add>
+  <select
+    class="form-select"
+    aria-label="Default select example"
+    (change)="filterSwabs($event, 'type')"
+  >
+    <option value="" selected disabled>Filter by Swab Type</option>
+    <option value="all">All types</option>
+    <option value="mol">Molecular</option>
+    <option value="rap">Rapid</option>
+  </select>
+  <select
+    class="form-select"
+    aria-label="Default select example"
+    (change)="filterSwabs($event, 'team_id')"
+  >
+    <option value="" selected disabled>Filter by Team</option>
+    <option value="all">All teams</option>
+    <option value="1">Pappalardo - Sambataro</option>
+    <option value="2">Zappulla - Troina</option>
+    <option value="3">Prestifilippo - Del Pozzo</option>
+  </select>
   <table class="col-12">
     <caption class="caption">
       <div class="m-1 col-2 border_team1">Team 1</div>

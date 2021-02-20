@@ -46,8 +46,6 @@ export class TablePaginationPatientsComponent implements OnInit {
   }
 
   async onSubmit() {
-    this.modalService.dismissAll();
-    console.log(typeof this.patient.dob, this.editProfileForm.getRawValue());
     this.patientsService
       .updatePatient(
         this.patient.patient_id,
@@ -63,10 +61,19 @@ export class TablePaginationPatientsComponent implements OnInit {
         async (Response) => {
           this.message = 'Patient Modified';
           this.patients = await this.patientsService.getAllPatients();
+          this.modalService.dismissAll();
         },
-        (error) => {
+        (err) => {
           this.message = 'Error';
-          console.log('Error is, ', error);
+          console.log('Error is, ', err);
+          if (err.error.errors) {
+            err.error.errors.forEach((item: {}) => {
+              (<any>this)[Object.keys(item)[0]] =
+                'ERROR ' + Object.values(item)[0];
+            });
+          } else {
+            alert('ERROR ' + err.error);
+          }
         }
       );
   }

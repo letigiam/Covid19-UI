@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
 import { SwabsService } from 'src/app/services/swabs.service';
 import * as moment from 'moment';
@@ -29,21 +28,20 @@ export class TablePaginationSwabsComponent implements OnInit {
   editSwabForm: any;
   constructor(
     private swabsService: SwabsService,
-    private router: Router,
     private modalService: NgbModal,
     private fb: FormBuilder
   ) {}
+  filterSwabs({ target: { selectedOptions } }: any, filter: string) {
+    this.daysSelectedContent = Object.values(this.allSwabs);
+    if (selectedOptions[0].value !== 'all')
+      this.daysSelectedContent = this.daysSelectedContent.map((array: Swab[]) =>
+        array.filter((swab: any) => swab[filter] === selectedOptions[0].value)
+      );
+  }
 
   async ngOnInit() {
-    try {
-      this.allSwabs = await this.swabsService.allSwabs();
-    } catch (err) {
-      alert(err.error);
-
-      if (err.status === 401) {
-        this.router.navigate(['login']);
-      }
-    }
+    this.range.valueChanges.subscribe(async () => await this.getSwabsByDate());
+    this.allSwabs = await this.swabsService.allSwabs();
     this.daysSelected = Object.keys(this.allSwabs).map(
       (i) => moment(i).format('dddd') + ' ' + moment(i).format('DD-MM')
     );
@@ -72,17 +70,14 @@ export class TablePaginationSwabsComponent implements OnInit {
     this.daysSelectedContent = Object.values(this.allSwabs);
   };
   openModal(targetModal: any, swab: Swab) {
-    console.log(swab.swab_id);
     this.swabToUpdate = swab;
     this.modalService.open(targetModal, {
       centered: true,
       backdrop: 'static',
     });
-    console.log(swab.date.substr(11, 16));
     this.editSwabForm.patchValue({
       team_id: swab.team_id,
       date: swab.date.substr(0, 10),
-      // time: swab.date.substr(11, 14), NON FUNZIONA
       type: swab.type,
       done: swab.done,
     });
