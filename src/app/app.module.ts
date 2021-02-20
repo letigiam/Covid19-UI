@@ -21,11 +21,9 @@ import { TablePaginationSwabsComponent } from './components/table-pagination-swa
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PatientAddComponent } from './components/patient-add/patient-add.component';
 import { LoginComponent } from './components/login/login.component';
-import {
-  NgbPaginationModule,
-  NgbAlertModule,
-} from '@ng-bootstrap/ng-bootstrap';
+import {  NgbPaginationModule,  NgbAlertModule,} from '@ng-bootstrap/ng-bootstrap';
 import { SwabAddComponent } from './components/swab-add/swab-add.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +37,7 @@ import { SwabAddComponent } from './components/swab-add/swab-add.component';
     PatientAddComponent,
     LoginComponent,
     SwabAddComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,

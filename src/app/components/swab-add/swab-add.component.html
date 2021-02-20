@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--
 <button
   type="button"
   class="btn btn-success btn-radius"
@@ -7,7 +8,7 @@
 >
   Program a new Swab
 </button>
-<!-- Modal -->
+
 <div
   class="modal fade"
   id="newSwabModal"
@@ -124,3 +125,131 @@
     </div>
   </div>
 </div>
+-->
+
+<button
+  type="button"
+  class="btn btn-success btn-edit"
+  (click)="openModal(swabAddModal)"
+>
+Program Swab
+</button>
+<ng-template #swabAddModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="swabAddLabel">Program Swab</h5>
+    <button
+      type="button"
+      class="close"
+      (click)="modal.dismiss()"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]="swabAddForm" (ngSubmit)="onSubmit()" >
+      <div class="form-group row">
+        <label for="team" class="col-sm-4 col-form-label">Team</label>
+        <div class="col-sm-8">
+          <select
+          formControlName="team"
+          class="form-select"
+          aria-label="Default select example"
+          
+        >
+          <option value="" selected disabled>Team</option>
+          <option value="1">Pappalardo - Sambataro</option>
+          <option value="2">Zappulla - Troina</option>
+          <option value="3">Prestifilippo - Del Pozzo</option>
+        </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="date" class="col-sm-4 col-form-label">Date and Time</label>
+        <div class="col-sm-8">                
+            <input
+              
+              type="date"
+              class="form-control"
+              id="date"
+              [ngClass]="[date.includes('ERROR') ? 'error' : '']"
+            />
+         </div>
+         <div><ngb-timepicker [(ngModel)]="time" [ngModelOptions]="{standalone: true}"></ngb-timepicker></div>
+      </div>
+      <div class="form-group row">
+        <label for="swab" class="col-sm-4 col-form-label">Swab Type</label>
+        <div class="col-sm-8">
+          <select
+          formControlName="swabType"
+          class="form-select"
+          aria-label="swab type"
+        >
+          <option value="" selected disabled>Swab type</option>
+
+          <option value="mol">Molecular</option>
+          <option value="rap">Rapid</option>
+        </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="patient" class="col-sm-4 col-form-label">Patient</label>
+        <div class="col-sm-8">
+         <select            
+            class="form-select"
+            aria-label="patient"
+            [ngClass]="[patient_id.includes('ERROR') ? 'error' : '']"
+            placeholder="Select a patient"
+          >
+            <option value="" selected disabled>Patient</option>
+
+            <option
+              *ngFor="let patient of patients"
+              value="{{ patient.patient_id }}"
+            >
+              {{ patient.name }} - {{ patient.fiscal_code }}
+            </option>
+          </select>
+        </div>
+      </div>
+       <div class="form-check">
+          <input
+            
+            type="checkbox"
+            class="form-check-input"
+            id="alreadyDone"
+            value=""
+          />
+          <label for="alreadyDone" class="form-check-label">Already Done</label>
+        </div>
+        <div class="form-check">
+          <input
+           
+            type="checkbox"
+            class="form-check-input"
+            id="positive_res"
+            value=""
+          />
+          <label for="positive_res" class="form-check-label"
+            >Positive Result</label
+          >
+      </div>
+      <app-patient-add></app-patient-add>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary btn-radius"
+          (click)="modal.dismiss()"
+        >
+          Close
+        </button>
+        <button type="submit" class="btn btn-success btn-radius">
+          Save changes
+        </button>
+      </div>
+    </form>
+   
+  </div>
+</ng-template>
+

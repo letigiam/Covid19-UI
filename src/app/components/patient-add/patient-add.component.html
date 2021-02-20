@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-
-<button
+<!--
+  <button
   class="btn btn-success btn-radius"
   type="button"
   data-bs-toggle="modal"
@@ -9,7 +9,7 @@
   Add Patient
 </button>
 
-<!-- Modal -->
+
 <div
   class="modal fade"
   id="addPatientModal"
@@ -150,3 +150,132 @@
     </div>
   </div>
 </div>
+
+-->
+
+  <button
+          type="button"
+          class="btn btn-success btn-edit"
+          (click)="openModal(addPatientModal)"
+        >
+          Add Patient
+        </button>
+<ng-template #addPatientModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="addPatientModal">Register Patient Form</h5>
+    <button
+      type="button"
+      class="close"
+      (click)="modal.dismiss()"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]="addPatientForm" (ngSubmit)="onSubmit()">
+      <div class="form-group row">
+        <label for="address" class="col-sm-4 col-form-label">Name</label>
+        <div class="col-sm-8">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="name"
+            id="name"
+            [ngClass]="[name.includes('ERROR') ? 'error' : '']"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="email" class="col-sm-4 col-form-label">Email</label>
+        <div class="col-sm-8">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="email"
+            id="email"
+            [ngClass]="[email.includes('ERROR') ? 'error' : '']"
+
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="phone" class="col-sm-4 col-form-label">Date of Birth</label>
+        <div class="col-sm-8">
+           <input
+              type="date"
+              class="form-control"
+              id="dob"
+              [ngClass]="[dob.includes('ERROR') ? 'error' : '']"
+            />
+        </div>
+      </div>
+   
+      
+      <div class="form-group row">
+        <label for="phone" class="col-sm-4 col-form-label">Fiscal Code</label>
+        <div class="col-sm-8">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="fiscal_code"
+            id="fiscal_code"
+            [ngClass]="[fiscal_code.includes('ERROR') ? 'error' : '']"
+          />
+        </div>
+      </div>
+       <div class="form-group row">
+        <label for="address" class="col-sm-4 col-form-label">Address</label>
+        <div class="col-sm-8">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="address"
+            id="address"
+            [ngClass]="[address.includes('ERROR') ? 'error' : '']"
+
+          />
+        </div>
+      </div>
+       <div class="form-group row">
+        <label for="phone" class="col-sm-4 col-form-label">Phone</label>
+        <div class="col-sm-8">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="phone"
+            id="phone"
+            [ngClass]="[phone.includes('ERROR') ? 'error' : '']"
+
+          />
+        </div>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label" for="flexCheckDefault">
+          Has Covid
+        </label>
+        <input
+          class="form-check-input"
+          type="checkbox"
+          formControlName="hasCovid"
+          value=""
+          id="flexCheckDefault"
+        />
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary btn-radius"
+          (click)="modal.dismiss()"
+        >
+          Close
+        </button>
+        <button type="submit" class="btn btn-success btn-radius">
+          Save changes
+        </button>
+      </div>
+    </form>
+    
+  </div>
+</ng-template>
