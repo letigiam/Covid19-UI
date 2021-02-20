@@ -3,6 +3,7 @@ import { Patient } from 'src/app/interface/list-of-patients';
 import { PatientsService } from 'src/app/services/patients.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-patientsTable',
@@ -17,12 +18,19 @@ export class patientsTableComponent implements OnInit {
   constructor(
     private patientsService: PatientsService,
     private modalService: NgbModal,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
   async ngOnInit() {
-    this.patients = await this.patientsService.getAllPatients();
-
+    try {
+      this.patients = await this.patientsService.getAllPatients();
+    } catch (err) {
+      alert(err.error ? err.error : err.message);
+      if (err.status === 401) {
+        this.router.navigate(['login']);
+      }
+    }
     this.editProfileForm = this.fb.group({
       address: [''],
       email: [''],
@@ -31,7 +39,14 @@ export class patientsTableComponent implements OnInit {
     });
   }
   updatePatients = async () => {
-    this.patients = await this.patientsService.getAllPatients();
+    try {
+      this.patients = await this.patientsService.getAllPatients();
+    } catch (err) {
+      alert(err.error ? err.error : err.message);
+      if (err.status === 401) {
+        this.router.navigate(['login']);
+      }
+    }
   };
   openModal(targetModal: any, patient: Patient) {
     this.modalService.open(targetModal, {
@@ -61,12 +76,12 @@ export class patientsTableComponent implements OnInit {
       )
       .subscribe(
         async (Response) => {
-          this.message = 'Patient Modified';
+          alert('Patient Modified');
           this.patients = await this.patientsService.getAllPatients();
           this.modalService.dismissAll();
         },
         (err) => {
-          this.message = 'Error';
+          alert('Error');
           console.log('Error is, ', err);
           if (err.error.errors) {
             err.error.errors.forEach((item: {}) => {
@@ -82,10 +97,10 @@ export class patientsTableComponent implements OnInit {
   async onDelete() {
     this.patientsService.deletePatient(this.patient.patient_id).subscribe(
       (Response) => {
-        this.message = 'Patient Deleted';
+        alert('Patient Deleted');
       },
       (error) => {
-        this.message = 'Error';
+        alert('Error');
         console.log('Error is, ', error);
       }
     );

@@ -7,17 +7,24 @@ table {
 .fa-times {
   color: red;
 }
+.card {
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(6.5px);
+  -webkit-backdrop-filter: blur(6.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
 .border_team1 {
-  border: 1px solid #22ff22;
+  background: rgba(199, 37, 37, 0.5);
 }
 .border_team2 {
-  border: 1px solid #2256ff;
+  background: rgba(53, 51, 184, 0.5);
 }
 .border_team3 {
-  border: 1px solid #ff8d22;
+  background: rgba(81, 192, 77, 0.5);
 }
 .border_team4 {
-  border: 1px solid #ff2222;
+  background: rgba(200, 202, 62, 0.5);
 }
 .btn-radius {
   border-radius: 25px;
@@ -25,4 +32,31 @@ table {
   font-size: 15px;
   line-height: 1.5;
   color: #fff;
+}
+.form-check-label {
+  padding-left: 14px;
+}
+ngb-timepicker {
+  font-size: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card {
+  padding: 5%;
+  transform: translateY(0rem);
+  transition: transform 0.5s ease 0s;
+}
+.card:hover {
+  cursor: pointer;
+  transform: translate(-0.2rem, -0.2rem);
+  box-shadow: 0 10px 19px 1px rgba(71, 193, 191, 0.2);
+  transition: transform 0.5s ease 0s;
+}
+.form-check-input {
+  margin-left: 0px;
+  left: 177px;
+}
+.form-check-label {
+  padding-left: 14px;
 }

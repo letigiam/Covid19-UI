@@ -14,8 +14,12 @@
       <th scope="col">Has Covid</th>
     </tr>
   </thead>
-  <tbody *ngFor="let patient of patients">
-    <tr>
+  <tbody>
+    <tr
+      *ngFor="let patient of patients"
+      (click)="openModal(editPatientModal, patient)"
+      class="patient_row"
+    >
       <th scope="row">{{ patient.patient_id }}</th>
       <td>{{ patient.name }}</td>
       <td>{{ patient.fiscal_code }}</td>
@@ -24,15 +28,6 @@
       <td>{{ patient.email }}</td>
       <td>{{ patient.phone }}</td>
       <td>{{ patient.hasCovid }}</td>
-      <td>
-        <button
-          type="button"
-          class="btn btn-success btn-edit"
-          (click)="openModal(editPatientModal, patient)"
-        >
-          Edit
-        </button>
-      </td>
     </tr>
   </tbody>
 </table>

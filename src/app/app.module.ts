@@ -11,7 +11,6 @@ import { SwabComponent } from './components/swab/swab.component';
 import { patientsTableComponent } from './components/patientsTable/patientsTable.component';
 import { MatInputModule } from '@angular/material/input';
 
-import { CalendarComponent } from './components/calendar/calendar.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
@@ -25,7 +24,6 @@ import {
   NgbPaginationModule,
   NgbAlertModule,
 } from '@ng-bootstrap/ng-bootstrap';
-import { SwabAddComponent } from './components/swab-add/swab-add.component';
 import { LogoutComponent } from './components/logout/logout.component';
 
 @NgModule({
@@ -35,11 +33,9 @@ import { LogoutComponent } from './components/logout/logout.component';
     PatientsComponent,
     SwabComponent,
     patientsTableComponent,
-    CalendarComponent,
     swabsTableComponent,
     PatientAddComponent,
     LoginComponent,
-    SwabAddComponent,
     LogoutComponent,
   ],
   imports: [

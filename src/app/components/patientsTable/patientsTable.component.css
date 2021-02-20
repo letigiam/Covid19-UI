@@ -1,29 +1,38 @@
 table {
   width: 100%;
 }
-  
-.btn-success{
-  background-color:#20aa3e;
+
+.btn-success {
+  background-color: #20aa3e;
 }
 
-
-.btn-radius{
+.btn-radius {
   border-radius: 25px;
   font-family: Poppins-Medium;
   font-size: 15px;
   line-height: 1.5;
   color: #fff;
-  }
+}
 
-  .btn-edit{
+.btn-edit {
   border-radius: 25px;
   font-family: Poppins-Medium;
   font-size: 15px;
   line-height: 1.5;
-  color: #fff; 
-  }
-  
- .form-check-input{ 
+  color: #fff;
+}
+
+.form-check-input {
   margin-left: 0px;
   left: 177px;
+}
+.form-check-label {
+  padding-left: 14px;
+}
+
+.patient_row:hover {
+  cursor: pointer;
+  transform: translate(-0.2rem, -0.2rem);
+  box-shadow: 0 10px 19px 1px rgba(0, 0, 0, 0.2);
+  transition: transform 0.5s ease 0s;
 }

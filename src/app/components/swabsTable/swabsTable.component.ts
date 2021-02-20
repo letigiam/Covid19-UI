@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Swab } from 'src/app/interface/list-of-swabs';
 import { Patient } from 'src/app/interface/list-of-patients';
 import { PatientsService } from 'src/app/services/patients.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-swabsTable',
@@ -29,8 +30,8 @@ export class swabsTableComponent implements OnInit {
     phone: '0',
     address: '',
     patient_id: '0',
-    team_id: 0,
-    date: '',
+    team_id: 1,
+    date: '0000000000000',
     type: 'mol',
     done: false,
     positive_res: false,
@@ -45,6 +46,7 @@ export class swabsTableComponent implements OnInit {
   constructor(
     private swabsService: SwabsService,
     private patientsService: PatientsService,
+    private router: Router,
 
     private modalService: NgbModal,
     private fb: FormBuilder
@@ -60,13 +62,24 @@ export class swabsTableComponent implements OnInit {
     this.patients = await this.patientsService.getAllPatients();
   };
   async ngOnInit() {
-    this.range.valueChanges.subscribe(async () => await this.getSwabsByDate());
-    this.patients = await this.patientsService.getAllPatients();
-    this.allSwabs = await this.swabsService.allSwabs();
-    this.daysSelected = Object.keys(this.allSwabs).map(
-      (i) => moment(i).format('dddd') + ' ' + moment(i).format('DD-MM')
-    );
-    this.daysSelectedContent = Object.values(this.allSwabs);
+    try {
+      this.range.valueChanges.subscribe(
+        async () => await this.getSwabsByDate()
+      );
+      this.patients = await this.patientsService.getAllPatients();
+
+      this.allSwabs = await this.swabsService.allSwabs();
+      this.daysSelected = Object.keys(this.allSwabs).map(
+        (i) => moment(i).format('dddd') + ' ' + moment(i).format('DD-MM')
+      );
+      this.daysSelectedContent = Object.values(this.allSwabs);
+    } catch (err) {
+      alert(err.error ? err.error : 'Error');
+      if (err.status === 401) {
+        this.router.navigate(['login']);
+      }
+    }
+
     this.swabForm = this.fb.group({
       date: [''],
       done: [''],
@@ -95,10 +108,12 @@ export class swabsTableComponent implements OnInit {
   openModal(targetModal: any, action: string, swab?: Swab) {
     this.action = action;
     this.swabToUpdate = swab ? swab : this.newSwab;
+
     this.modalService.open(targetModal, {
       centered: true,
       backdrop: 'static',
     });
+    console.log('swabform', this.swabForm);
     this.swabForm.patchValue({
       team_id: this.swabToUpdate.team_id,
       date: this.swabToUpdate.date.substr(0, 10),
