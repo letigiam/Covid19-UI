@@ -13,6 +13,7 @@ const routes: Routes = [
     children: [{ path: 'registerPatient', component: PatientAddComponent }],
   },
   { path: 'home', component: HomeComponent },
+  {path: 'swabs', component: swabsTableComponent},
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];

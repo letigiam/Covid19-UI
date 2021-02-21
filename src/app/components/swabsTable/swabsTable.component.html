@@ -1,25 +1,20 @@
-<h3>Covid's Swabs</h3>
 <div class="row justify-content-center">
   <div class="col-12 col-md-11">
     <div
-      class="d-flex flex-column flex-sm-row justify-content-between align-items-center"
+      class="d-flex flex-column flex-sm-row justify-content-between align-items-start"
     >
       <button
-        class="btn btn-success btn-radius m-2"
+        class="btn btn-success btn-radius m-2 myBtn"
         (click)="openModal(swabModal, 'post')"
       >
         Program new Swab
       </button>
       <div class="d-flex justify-content-center">
-        <mat-form-field appearance="outline" class="mt-4">
+        <mat-form-field appearance="outline" >
           <mat-label>Select Date Range</mat-label>
           <mat-date-range-input [rangePicker]="picker" [formGroup]="range">
-            <input
-              matStartDate
-              placeholder="Start Date"
-              formControlName="start"
-            />
-            <input matEndDate placeholder="End Date" formControlName="end" />
+            <input matStartDate placeholder="Start Date" formControlName="start" class="rangeDate"/>
+            <input matEndDate placeholder="End Date" formControlName="end" class="rangeDate" />
           </mat-date-range-input>
           <mat-datepicker-toggle
             matSuffix
@@ -58,7 +53,7 @@
 <div class="row justify-content-center">
   <div class="col-12 col-md-11 d-block table-swab">
     <div class="">
-      <div class="mat-elevation-z8 overflow-scroll">
+      <div class="mat-elevation-z8 overflow-scroll templateTable">
         <table class="">
           <caption class="caption">
             <div class="m-1 col-2 border_team1">Team 1</div>
@@ -106,8 +101,8 @@
           </tbody>
         </table>
       </div>
-      <ng-template #swabModal let-modal>
-        <div class="modal-header">
+      <ng-template #swabModal let-modal class="">
+        <div class="modal-header myModal">
           <h5 class="modal-title" id="modalLabel">{{ action }} Swab</h5>
           <button
             type="button"
@@ -120,7 +115,7 @@
         </div>
 
         <div class="modal-body">
-          <form [formGroup]="swabForm">
+          <form [formGroup]="swabForm" class="myModal">
             <div class="form-group row">
               <label for="team" class="col-sm-4 col-form-label">Team</label>
               <div class="col-sm-8">
@@ -137,7 +132,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <span *ngIf="errors && errors.date">{{ errors.date }}</span>
+              
               <label for="date" class="col-sm-4 col-form-label">Date</label>
               <div class="col-sm-8">
                 <input
@@ -147,7 +142,8 @@
                   id="date"
                   [ngClass]="[errors.date ? 'error' : '']"
                 />
-              </div>
+                <span class="spanPatient" *ngIf="errors && errors.date">{{ errors.date }}</span>
+              </div>              
             </div>
             <div class="form-group row">
               <label for="time" class="col-sm-4 col-form-label">Time</label>
@@ -176,9 +172,6 @@
               </div>
             </div>
             <div class="form-group row" *ngIf="action === 'post'">
-              <span *ngIf="errors && errors.patient_id">{{
-                errors.patient_id
-              }}</span>
               <label for="patient" class="col-sm-4 col-form-label"
                 >Patient</label
               >
@@ -199,6 +192,9 @@
                     {{ patient.name }} - {{ patient.fiscal_code }}
                   </option>
                 </select>
+                <span class="spanPatient" *ngIf="errors && errors.patient_id">{{
+                  errors.patient_id
+                }}</span>
               </div>
               <app-patient-add (emitter)="updatePatients()"></app-patient-add>
             </div>
@@ -239,7 +235,7 @@
               >
                 Close
               </button>
-              <button (click)="submitSwab()" class="btn btn-success btn-radius">
+              <button (click)="submitSwab()" class="btn btn-success btn-radius myBtn">
                 Save changes
               </button>
             </div>

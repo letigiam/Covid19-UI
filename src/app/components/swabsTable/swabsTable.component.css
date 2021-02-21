@@ -1,3 +1,10 @@
+
+label{    font-family: Poppins;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #fff; 
+}
+
 table {
   width: 100%;
   border-radius: 10px;
@@ -39,6 +46,41 @@ table {
   border-radius: 10px;
 }
 
+.myBtn{
+  background-color: #448067;
+}
+
+
+
+* .modal-content, .modal-body, .modal-header{  
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(6.5px);
+  -webkit-backdrop-filter: blur(6.5px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: #75d4e0
+  
+ }
+
+ *.form-select,#date, input {
+   background-color: rgb(232, 240, 254);
+   border-radius:10px;
+ }
+ mat-label{
+  font-family: Poppins;
+  font-size:14px;
+ }
+ .rangeDate{
+   background-color: white;
+   
+ }
+ .templateTable{border-radius:10px;}
+ 
+ .spanPatient {
+  font-size:9px;
+  margin-left:10px;
+  position: fixed;
+} 
+
 .card {
   min-width: 200px;
   max-width: 250px;
@@ -61,7 +103,7 @@ table {
   background: rgba(200, 202, 62, 0.5);
 }
 .btn-radius {
-  border-radius: 25px;
+  border-radius: 10px;
   font-family: Poppins;
   font-size: 15px;
   line-height: 1.5;

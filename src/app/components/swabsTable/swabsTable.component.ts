@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Swab } from 'src/app/interface/list-of-swabs';
 import { Patient } from 'src/app/interface/list-of-patients';
 import { PatientsService } from 'src/app/services/patients.service';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-swabsTable',
@@ -49,13 +50,17 @@ export class swabsTableComponent implements OnInit {
     private modalService: NgbModal,
     private fb: FormBuilder
   ) {}
-  filterSwabs({ target: { selectedOptions } }: any, filter: string) {
+
+   filterSwabs({ target: { selectedOptions } }: any, filter: string) {
+    
     this.daysSelectedContent = Object.values(this.allSwabs);
     if (selectedOptions[0].value !== 'all')
       this.daysSelectedContent = this.daysSelectedContent.map((array: Swab[]) =>
-        array.filter((swab: any) => swab[filter] === selectedOptions[0].value)
+        array.filter((swab: any) => swab[filter] === Number(selectedOptions[0].value))
       );
   }
+ 
+
   updatePatients = async () => {
     this.patients = await this.patientsService.getAllPatients();
   };
@@ -85,15 +90,18 @@ export class swabsTableComponent implements OnInit {
     var dstostring = moment(ds).subtract(1, 'day').format('YYYY-MM-DD');
     var ed = new Date(this.range.value.end);
     var edtostring = moment(ed).add(1, 'day').format('YYYY-MM-DD');
-
-    this.allSwabs = await this.swabsService.allSwabsByDate(
-      dstostring,
-      edtostring
-    );
-    this.daysSelected = Object.keys(this.allSwabs).map(
-      (i) => moment(i).format('dddd') + ' ' + moment(i).format('DD-MM')
-    );
-    this.daysSelectedContent = Object.values(this.allSwabs);
+    console.log(dstostring, edtostring);
+    if(edtostring !== "1970-01-02"){
+      this.allSwabs = await this.swabsService.allSwabsByDate(
+        dstostring,
+        edtostring
+      );
+      this.daysSelected = Object.keys(this.allSwabs).map(
+        (i) => moment(i).format('dddd') + ' ' + moment(i).format('DD-MM')
+      );
+      this.daysSelectedContent = Object.values(this.allSwabs);
+    }
+    
   };
   openModal(targetModal: any, action: string, swab?: Swab) {
     this.action = action;
@@ -152,6 +160,7 @@ export class swabsTableComponent implements OnInit {
             }
           }
         );
+       
     } else if (this.action === 'post') {
       this.swabsService
         .addSwab(
@@ -182,5 +191,6 @@ export class swabsTableComponent implements OnInit {
           }
         );
     }
+   
   }
 }
