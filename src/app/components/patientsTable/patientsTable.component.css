@@ -36,3 +36,5 @@ table {
   box-shadow: 0 10px 19px 1px rgba(0, 0, 0, 0.2);
   transition: transform 0.5s ease 0s;
 }
+
+.myForm input{border-radius:10px}
