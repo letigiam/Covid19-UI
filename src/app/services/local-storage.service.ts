@@ -11,7 +11,7 @@ export class LocalStorageService {
   }
   get(key: string): any {
     if (this.isLocalStorageSupported) {
-      return this.localStorage.getItem(key);
+      return this.localStorage.getItem(key) ?? '';
     }
     return null;
   }

@@ -1,17 +1,8 @@
-
-
-
-
-@font-face {
-  font-family: Poppins-Medium;
-  src: url('../app/components/login/fonts/poppins/Poppins-Medium.ttf'); 
-}
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
 * {
-font-family: Poppins-Medium;
+  font-family: Poppins;
   font-size: 15px;
   line-height: 1.5;
   color: #666666;
 }
-

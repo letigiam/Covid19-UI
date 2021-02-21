@@ -6,8 +6,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { PatientsComponent } from './components/patients/patients.component';
-import { SwabComponent } from './components/swab/swab.component';
 import { patientsTableComponent } from './components/patientsTable/patientsTable.component';
 import { MatInputModule } from '@angular/material/input';
 
@@ -31,8 +29,6 @@ import { HomeComponent } from './components/home/home.component';
   declarations: [
     AppComponent,
     NavbarComponent,
-    PatientsComponent,
-    SwabComponent,
     patientsTableComponent,
     swabsTableComponent,
     PatientAddComponent,

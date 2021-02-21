@@ -1,221 +1,251 @@
+<h3>Covid's Swabs</h3>
 <div class="row justify-content-center">
-  <div class="col-12 col-md-11 ">
-    
-  <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center">
-    
-    <button class="btn btn-success btn-radius m-2" (click)="openModal(swabModal, 'post')">Program new Swab</button>
-    <div class="d-flex justify-content-center">
-    <mat-form-field appearance="outline" class="mt-4 ">
-    <mat-label>Select Date Range</mat-label>
-    <mat-date-range-input [rangePicker]="picker" [formGroup]="range">
-      <input matStartDate placeholder="Start Date" formControlName="start" />
-      <input matEndDate placeholder="End Date" formControlName="end" />
-    </mat-date-range-input>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-date-range-picker #picker></mat-date-range-picker>
-    </mat-form-field>
-  </div>
-    <div>
-      <select class="form-select m-1 component-style" aria-label="Default select example" (change)="filterSwabs($event, 'type')">
-        <option value="" selected disabled>Filter by Swab Type</option>
-        <option value="all">All types</option>
-        <option value="mol">Molecular</option>
-        <option value="rap">Rapid</option>
-      </select>
-    
-      <select class="form-select m-1 component-style" aria-label="Default select example" (change)="filterSwabs($event, 'team_id')">
-        <option value="" selected disabled>Filter by Team</option>
-        <option value="all">All teams</option>
-        <option value="1">Pappalardo - Sambataro</option>
-        <option value="2">Zappulla - Troina</option>
-        <option value="3">Prestifilippo - Del Pozzo</option>
-      </select>
+  <div class="col-12 col-md-11">
+    <div
+      class="d-flex flex-column flex-sm-row justify-content-between align-items-center"
+    >
+      <button
+        class="btn btn-success btn-radius m-2"
+        (click)="openModal(swabModal, 'post')"
+      >
+        Program new Swab
+      </button>
+      <div class="d-flex justify-content-center">
+        <mat-form-field appearance="outline" class="mt-4">
+          <mat-label>Select Date Range</mat-label>
+          <mat-date-range-input [rangePicker]="picker" [formGroup]="range">
+            <input
+              matStartDate
+              placeholder="Start Date"
+              formControlName="start"
+            />
+            <input matEndDate placeholder="End Date" formControlName="end" />
+          </mat-date-range-input>
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+      </div>
+      <div>
+        <select
+          class="form-select m-1"
+          aria-label="Default select example"
+          (change)="filterSwabs($event, 'type')"
+        >
+          <option value="" selected disabled>Filter by Swab Type</option>
+          <option value="all">All types</option>
+          <option value="mol">Molecular</option>
+          <option value="rap">Rapid</option>
+        </select>
+
+        <select
+          class="form-select m-1"
+          aria-label="Default select example"
+          (change)="filterSwabs($event, 'team_id')"
+        >
+          <option value="" selected disabled>Filter by Team</option>
+          <option value="all">All teams</option>
+          <option value="1">Pappalardo - Sambataro</option>
+          <option value="2">Zappulla - Troina</option>
+          <option value="3">Prestifilippo - Del Pozzo</option>
+        </select>
+      </div>
     </div>
   </div>
-  </div>  
-    
 </div>
 <div class="row justify-content-center">
-  <div class="col-12 col-md-11 d-block  table-swab">
+  <div class="col-12 col-md-11 d-block table-swab">
     <div class="">
-    <div class="mat-elevation-z8 overflow-scroll templateTable">  
-    <table class="" >
-      <caption class="caption">
-        <div class="m-1 col-2 border_team1">Team 1</div>
-        <div class="m-1 col-2 border_team2">Team 2</div>
-        <div class="m-1 col-2 border_team3">Team 3</div>
-        <div>
-          Rapid Swab : <i class="fas fa-registered"></i> Molecular Swab:
-          <i class="fas fa-vial"></i>
-        </div>
-      </caption>
-      <thead class="table">
-        <tr>
-          <th *ngFor="let day of daysSelected">{{ day }}</th>
-        </tr>
-      </thead>
-      <tbody class="mytbody">
-        <td *ngFor="let dayContent of daysSelectedContent">
-          <div
-            *ngFor="let swab of dayContent"
-            class="card border_team{{ swab.team_id }} m-1"
-            (click)="openModal(swabModal, 'update', swab)"
-          >
-            <p>
-              <i class="fas fa-clock"></i>{{ swab.date.substring(10, 16) }} -
-              <i
-                [ngClass]="[
-                  swab.type === 'rap' ? 'fas fa-registered' : 'fas fa-vial'
-                ]"
-              ></i>
-            </p>
-            <p>{{ swab.name }}</p>
-            <p><i class="fas fa-house-user"></i>{{ swab.address }}</p>
-            <p><i class="fas fa-phone"></i>{{ swab.phone }}</p>
-            <p>
-              Done :
-              <i
-                [ngClass]="[swab.done ? 'far fa-check-circle' : 'fas fa-times']"
-              ></i>
-            </p>
-          </div>
-        </td>
-      </tbody>
-    </table>
-  </div>
-  <ng-template #swabModal let-modal>
-    <div class="modal-header">
-      <h5 class="modal-title" id="modalLabel">{{ action }} Swab</h5>
-      <button
-        type="button"
-        class="close"
-        (click)="modal.dismiss()"
-        aria-label="Close"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-
-    <div class="modal-body">
-      <form [formGroup]="swabForm" class="myForm">
-        <div class="form-group row ">
-          <label for="team" class="col-sm-4 col-form-label">Team</label>
-          <div class="col-sm-8">
-            <select 
-              formControlName="team_id"
-              class="form-select myForm "
-              aria-label="Default select example"
-            >
-              <option value="" selected disabled>Team</option>
-              <option value="1">Pappalardo - Sambataro</option>
-              <option value="2">Zappulla - Troina</option>
-              <option value="3">Prestifilippo - Del Pozzo</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="date" class="col-sm-4 col-form-label">Date</label>
-          <div class="col-sm-8">
-            <input
-              formControlName="date"
-              type="date"
-              class="form-control myForm"
-              id="date"
-              [ngClass]="[swabToUpdate.date.includes('ERROR') ? 'error' : '']"
-            />
-          </div>
-        </div>
-          <div class="form-group row">
-            <label for="time" class="col-sm-4 col-form-label">Time</label>
-            <div class="col-sm-8">
-              <ngb-timepicker
-                [(ngModel)]="time"
-                [ngModelOptions]="{ standalone: true }"
-              ></ngb-timepicker>
+      <div class="mat-elevation-z8 overflow-scroll">
+        <table class="">
+          <caption class="caption">
+            <div class="m-1 col-2 border_team1">Team 1</div>
+            <div class="m-1 col-2 border_team2">Team 2</div>
+            <div class="m-1 col-2 border_team3">Team 3</div>
+            <div>
+              Rapid Swab : <i class="fas fa-registered"></i> Molecular Swab:
+              <i class="fas fa-vial"></i>
             </div>
-           
-          
-        </div>
-        <div class="form-group row ">
-          <label for="swab" class="col-sm-4 col-form-label">Swab Type</label>
-          <div class="col-sm-8 ">
-            <select
-              formControlName="type"
-              class="form-select myForm"
-              aria-label="swab type"
-            >
-              <option value="" selected disabled>Swab type</option>
-
-              <option value="mol">Molecular</option>
-              <option value="rap">Rapid</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group row" *ngIf="action === 'post'">
-          <label for="patient" class="col-sm-4 col-form-label">Patient</label>
-          <div class="col-sm-8">
-            <select
-              class="form-select myForm"
-              aria-label="patient"
-              formControlName="patient_id"
-              placeholder="Select a patient"
-            >
-              <option value="" selected disabled>Patient</option>
-
-              <option
-                *ngFor="let patient of patients"
-                value="{{ patient.patient_id }}"
+          </caption>
+          <thead class="table">
+            <tr>
+              <th *ngFor="let day of daysSelected">{{ day }}</th>
+            </tr>
+          </thead>
+          <tbody class="mytbody">
+            <td *ngFor="let dayContent of daysSelectedContent">
+              <div
+                *ngFor="let swab of dayContent"
+                class="card border_team{{ swab.team_id }} m-1"
+                (click)="openModal(swabModal, 'update', swab)"
               >
-                {{ patient.name }} - {{ patient.fiscal_code }}
-              </option>
-            </select>
-          </div>
-          <app-patient-add (emitter)="updatePatients()"></app-patient-add>
-        </div>
-        <div class="form-check">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            id="alreadyDone"
-            value=""
-          />
-          <label for="alreadyDone" class="form-check-label">Already Done</label>
-        </div>
-        <div class="form-check">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            id="positive_res"
-            value=""
-          />
-          <label for="positive_res" class="form-check-label"
-            >Positive Result</label
-          >
-        </div>
-        <div class="modal-footer">
-          <button
-            *ngIf="action === 'update'"
-            class="btn btn-danger btn-radius"
-            (click)="onDelete()"
-          >
-            Delete
-          </button>
+                <p>
+                  <i class="fas fa-clock"></i
+                  >{{ swab.date.substring(10, 16) }} -
+                  <i
+                    [ngClass]="[
+                      swab.type === 'rap' ? 'fas fa-registered' : 'fas fa-vial'
+                    ]"
+                  ></i>
+                </p>
+                <p>{{ swab.name }}</p>
+                <p><i class="fas fa-house-user"></i>{{ swab.address }}</p>
+                <p><i class="fas fa-phone"></i>{{ swab.phone }}</p>
+                <p>
+                  Done :
+                  <i
+                    [ngClass]="[
+                      swab.done ? 'far fa-check-circle' : 'fas fa-times'
+                    ]"
+                  ></i>
+                </p>
+              </div>
+            </td>
+          </tbody>
+        </table>
+      </div>
+      <ng-template #swabModal let-modal>
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLabel">{{ action }} Swab</h5>
           <button
             type="button"
-            class="btn btn-secondary btn-radius"
+            class="close"
             (click)="modal.dismiss()"
+            aria-label="Close"
           >
-            Close
-          </button>
-          <button (click)="submitSwab()" class="btn btn-success btn-radius">
-            Save changes
+            <span aria-hidden="true">&times;</span>
           </button>
         </div>
-      </form>
-    </div>
-  </ng-template>
 
-  </div>
+        <div class="modal-body">
+          <form [formGroup]="swabForm">
+            <div class="form-group row">
+              <label for="team" class="col-sm-4 col-form-label">Team</label>
+              <div class="col-sm-8">
+                <select
+                  formControlName="team_id"
+                  class="form-select"
+                  aria-label="Default select example"
+                >
+                  <option value="" selected disabled>Team</option>
+                  <option value="1">Pappalardo - Sambataro</option>
+                  <option value="2">Zappulla - Troina</option>
+                  <option value="3">Prestifilippo - Del Pozzo</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <span *ngIf="errors && errors.date">{{ errors.date }}</span>
+              <label for="date" class="col-sm-4 col-form-label">Date</label>
+              <div class="col-sm-8">
+                <input
+                  formControlName="date"
+                  type="date"
+                  class="form-control"
+                  id="date"
+                  [ngClass]="[errors.date ? 'error' : '']"
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="time" class="col-sm-4 col-form-label">Time</label>
+              <div class="col-sm-8">
+                <ngb-timepicker
+                  [(ngModel)]="time"
+                  [ngModelOptions]="{ standalone: true }"
+                ></ngb-timepicker>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="swab" class="col-sm-4 col-form-label"
+                >Swab Type</label
+              >
+              <div class="col-sm-8">
+                <select
+                  formControlName="type"
+                  class="form-select"
+                  aria-label="swab type"
+                >
+                  <option value="" selected disabled>Swab type</option>
+
+                  <option value="mol">Molecular</option>
+                  <option value="rap">Rapid</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="action === 'post'">
+              <span *ngIf="errors && errors.patient_id">{{
+                errors.patient_id
+              }}</span>
+              <label for="patient" class="col-sm-4 col-form-label"
+                >Patient</label
+              >
+              <div class="col-sm-8">
+                <select
+                  class="form-select"
+                  aria-label="patient"
+                  formControlName="patient_id"
+                  placeholder="Select a patient"
+                  [ngClass]="[errors.patient_id ? 'error' : '']"
+                >
+                  <option value="" selected disabled>Patient</option>
+
+                  <option
+                    *ngFor="let patient of patients"
+                    value="{{ patient.patient_id }}"
+                  >
+                    {{ patient.name }} - {{ patient.fiscal_code }}
+                  </option>
+                </select>
+              </div>
+              <app-patient-add (emitter)="updatePatients()"></app-patient-add>
+            </div>
+            <div class="form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="alreadyDone"
+                value=""
+              />
+              <label for="alreadyDone" class="form-check-label"
+                >Already Done</label
+              >
+            </div>
+            <div class="form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="positive_res"
+                value=""
+              />
+              <label for="positive_res" class="form-check-label"
+                >Positive Result</label
+              >
+            </div>
+            <div class="modal-footer">
+              <button
+                *ngIf="action === 'update'"
+                class="btn btn-danger btn-radius"
+                (click)="onDelete()"
+              >
+                Delete
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary btn-radius"
+                (click)="modal.dismiss()"
+              >
+                Close
+              </button>
+              <button (click)="submitSwab()" class="btn btn-success btn-radius">
+                Save changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </ng-template>
+    </div>
   </div>
 </div>
-
