@@ -5,7 +5,7 @@
     
     <button class="btn btn-success btn-radius m-2" (click)="openModal(swabModal, 'post')">Program new Swab</button>
     <div class="d-flex justify-content-center">
-    <mat-form-field appearance="outline" class="mt-4">
+    <mat-form-field appearance="outline" class="mt-4 ">
     <mat-label>Select Date Range</mat-label>
     <mat-date-range-input [rangePicker]="picker" [formGroup]="range">
       <input matStartDate placeholder="Start Date" formControlName="start" />
@@ -16,14 +16,14 @@
     </mat-form-field>
   </div>
     <div>
-      <select class="form-select m-1" aria-label="Default select example" (change)="filterSwabs($event, 'type')">
+      <select class="form-select m-1 component-style" aria-label="Default select example" (change)="filterSwabs($event, 'type')">
         <option value="" selected disabled>Filter by Swab Type</option>
         <option value="all">All types</option>
         <option value="mol">Molecular</option>
         <option value="rap">Rapid</option>
       </select>
     
-      <select class="form-select m-1" aria-label="Default select example" (change)="filterSwabs($event, 'team_id')">
+      <select class="form-select m-1 component-style" aria-label="Default select example" (change)="filterSwabs($event, 'team_id')">
         <option value="" selected disabled>Filter by Team</option>
         <option value="all">All teams</option>
         <option value="1">Pappalardo - Sambataro</option>
@@ -38,7 +38,7 @@
 <div class="row justify-content-center">
   <div class="col-12 col-md-11 d-block  table-swab">
     <div class="">
-    <div class="mat-elevation-z8 overflow-scroll">  
+    <div class="mat-elevation-z8 overflow-scroll templateTable">  
     <table class="" >
       <caption class="caption">
         <div class="m-1 col-2 border_team1">Team 1</div>
@@ -97,13 +97,13 @@
     </div>
 
     <div class="modal-body">
-      <form [formGroup]="swabForm">
-        <div class="form-group row">
+      <form [formGroup]="swabForm" class="myForm">
+        <div class="form-group row ">
           <label for="team" class="col-sm-4 col-form-label">Team</label>
           <div class="col-sm-8">
-            <select
+            <select 
               formControlName="team_id"
-              class="form-select"
+              class="form-select myForm "
               aria-label="Default select example"
             >
               <option value="" selected disabled>Team</option>
@@ -119,7 +119,7 @@
             <input
               formControlName="date"
               type="date"
-              class="form-control"
+              class="form-control myForm"
               id="date"
               [ngClass]="[swabToUpdate.date.includes('ERROR') ? 'error' : '']"
             />
@@ -136,12 +136,12 @@
            
           
         </div>
-        <div class="form-group row">
+        <div class="form-group row ">
           <label for="swab" class="col-sm-4 col-form-label">Swab Type</label>
-          <div class="col-sm-8">
+          <div class="col-sm-8 ">
             <select
               formControlName="type"
-              class="form-select"
+              class="form-select myForm"
               aria-label="swab type"
             >
               <option value="" selected disabled>Swab type</option>
@@ -155,7 +155,7 @@
           <label for="patient" class="col-sm-4 col-form-label">Patient</label>
           <div class="col-sm-8">
             <select
-              class="form-select"
+              class="form-select myForm"
               aria-label="patient"
               formControlName="patient_id"
               placeholder="Select a patient"

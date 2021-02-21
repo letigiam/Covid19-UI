@@ -11,13 +11,15 @@
 }
 
 .btn-radius {
-  border-radius: 25px;
+  border-radius: 10px;
   font-family: Poppins-Medium;
   font-size: 15px;
   line-height: 1.5;
   color: #fff;
 }
 
+.myForm input {border-radius:10px}
+.myForm{border-radius:10px}
 .form-control {
   font-family: Poppins-Medium;
   font-size: 15px;

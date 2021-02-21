@@ -25,6 +25,7 @@ import {
   NgbAlertModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { LogoutComponent } from './components/logout/logout.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { LogoutComponent } from './components/logout/logout.component';
     PatientAddComponent,
     LoginComponent,
     LogoutComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

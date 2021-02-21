@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { PatientAddComponent } from './components/patient-add/patient-add.component';
 import { PatientsComponent } from './components/patients/patients.component';
 import { SwabComponent } from './components/swab/swab.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
     component: PatientsComponent,
     children: [{ path: 'registerPatient', component: PatientAddComponent }],
   },
+  {path:'home', component:HomeComponent},
   { path: 'swabs', component: SwabComponent },
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },

@@ -1,5 +1,6 @@
 table {
   width: 100%;
+  border-radius:10px;
 }
 .fa-check-circle {
   color: green;
@@ -31,6 +32,10 @@ table {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
 
+.component-style{
+  border-radius:10px;
+}
+
 .card {
   min-width:200px;
   max-width:250px;
@@ -53,7 +58,7 @@ table {
   background: rgba(200, 202, 62, 0.5);
 }
 .btn-radius {
-  border-radius: 25px;
+  border-radius: 10px;
   font-family: Poppins-Medium;
   font-size: 15px;
   line-height: 1.5;
@@ -62,11 +67,17 @@ table {
 .form-check-label {
   padding-left: 14px;
 }
+
+.templateTable{border-radius:10px;}
+
 ngb-timepicker {
   font-size: 1rem;
   display: flex;
   justify-content: flex-end;
+  border-radius:10px;
 }
+
+.myForm  {border-radius:10px}
 
 .card {
   padding: 5%;

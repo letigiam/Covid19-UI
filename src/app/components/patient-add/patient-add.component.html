@@ -155,12 +155,12 @@
 
 <button
   type="button"
-  class="btn btn-success btn-edit"
+  class="btn btn-success btn-edit btn-radius"
   (click)="openModal(addPatientModal)"
 >
   Add Patient
 </button>
-<ng-template #addPatientModal let-modal>
+<ng-template #addPatientModal let-modal class="myForm">
   <div class="modal-header">
     <h5 class="modal-title" id="addPatientModal">Register Patient Form</h5>
     <button
@@ -174,7 +174,7 @@
   </div>
 
   <div class="modal-body">
-    <form [formGroup]="addPatientForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="addPatientForm" (ngSubmit)="onSubmit()" class="myForm">
       <div class="form-group row">
         <label for="address" class="col-sm-4 col-form-label">Name</label>
         <div class="col-sm-8">

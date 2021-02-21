@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     this.service.login(this.username, this.password).subscribe(
       (data: HttpResponse<any>) => {
         this.localStorage.set('token', data.headers.get('x-auth-token'));
-        this.router.navigate(['patients']);
+        this.router.navigate(['home']);
       },
       (error) => {
         alert(error.error);
