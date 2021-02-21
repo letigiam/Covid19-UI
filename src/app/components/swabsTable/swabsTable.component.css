@@ -35,6 +35,10 @@ table {
   border-radius: 10px;
 }
 
+.component-style {
+  border-radius: 10px;
+}
+
 .card {
   min-width: 200px;
   max-width: 250px;
@@ -78,6 +82,10 @@ ngb-timepicker {
   font-size: 1rem;
   display: flex;
   justify-content: flex-end;
+  border-radius: 10px;
+}
+
+.myForm {
   border-radius: 10px;
 }
 
