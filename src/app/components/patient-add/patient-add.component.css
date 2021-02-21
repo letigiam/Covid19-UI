@@ -47,7 +47,12 @@ label{    font-family: Poppins;
   border-radius:10px;
 }
 
-
+.modal-title{
+  color: #fff;
+  font-weight: 700;
+  font-size: 2.5em;
+  text-shadow: 2px 2px #000000;
+}
 .myForm input {
   border-radius: 10px;
 }

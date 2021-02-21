@@ -4,9 +4,7 @@ import * as moment from 'moment';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Swab } from 'src/app/interface/list-of-swabs';
-import { Patient } from 'src/app/interface/list-of-patients';
 import { PatientsService } from 'src/app/services/patients.service';
-import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-swabsTable',
@@ -51,19 +49,33 @@ export class swabsTableComponent implements OnInit {
     private fb: FormBuilder
   ) {}
 
-   filterSwabs({ target: { selectedOptions } }: any, filter: string) {
-    
+  filterSwabs({ target: { selectedOptions } }: any, filter: string) {
     this.daysSelectedContent = Object.values(this.allSwabs);
     if (selectedOptions[0].value !== 'all')
       this.daysSelectedContent = this.daysSelectedContent.map((array: Swab[]) =>
         array.filter((swab: any) => swab[filter] == selectedOptions[0].value)
       );
   }
- 
 
   updatePatients = async () => {
     this.patients = await this.patientsService.getAllPatients();
   };
+  updateSwabs = async ()=>{
+    if(this.range.value.start){
+      await this.getSwabsByDate()
+    }
+    else{
+      this.allSwabs = await this.swabsService.allSwabs();
+    }
+    await this.getSwabsByDate()
+
+    this.daysSelected = this.allSwabs
+      ? Object.keys(this.allSwabs).map(
+          (i) => moment(i).format('dddd') + ' ' + moment(i).format('DD-MM')
+        )
+      : ['No Swabs Found!!!!'];
+    this.daysSelectedContent = Object.values(this.allSwabs);
+  }
   async ngOnInit() {
     this.swabForm = this.fb.group({
       date: [''],
@@ -74,34 +86,23 @@ export class swabsTableComponent implements OnInit {
       positive_res: [''],
       patient_id: [''],
     });
-    this.allSwabs = await this.swabsService.allSwabs();
-    this.patients = await this.patientsService.getAllPatients();
+    await this.updateSwabs();
+    await this.updatePatients();
 
-    this.range.valueChanges.subscribe(this.getSwabsByDate);
-    this.daysSelected = this.allSwabs
-      ? Object.keys(this.allSwabs).map(
-          (i) => moment(i).format('dddd') + ' ' + moment(i).format('DD-MM')
-        )
-      : ['No Swabs Found!!!!'];
-    this.daysSelectedContent = Object.values(this.allSwabs);
+    this.range.valueChanges.subscribe(this.updateSwabs);
+
   }
   getSwabsByDate = async () => {
     var ds = new Date(this.range.value.start);
     var dstostring = moment(ds).subtract(1, 'day').format('YYYY-MM-DD');
     var ed = new Date(this.range.value.end);
     var edtostring = moment(ed).add(1, 'day').format('YYYY-MM-DD');
-    console.log(dstostring, edtostring);
-    if(edtostring !== "1970-01-02"){
+    if (edtostring !== '1970-01-02') {
       this.allSwabs = await this.swabsService.allSwabsByDate(
         dstostring,
         edtostring
       );
-      this.daysSelected = Object.keys(this.allSwabs).map(
-        (i) => moment(i).format('dddd') + ' ' + moment(i).format('DD-MM')
-      );
-      this.daysSelectedContent = Object.values(this.allSwabs);
     }
-    
   };
   openModal(targetModal: any, action: string, swab?: Swab) {
     this.action = action;
@@ -124,11 +125,10 @@ export class swabsTableComponent implements OnInit {
     await this.swabsService.deleteSwab(this.swabToUpdate.swab_id);
     alert('Swab deleted');
     this.modalService.dismissAll();
-    this.range.value.endDate
-      ? await this.getSwabsByDate()
-      : (this.allSwabs = await this.swabsService.allSwabs());
+    await this.updateSwabs()
   }
   async submitSwab() {
+    this.errors = {};
     if (this.action === 'update') {
       this.swabsService
         .updateSwab(
@@ -136,7 +136,7 @@ export class swabsTableComponent implements OnInit {
           this.swabForm.getRawValue().team_id,
           this.swabForm.getRawValue().date +
             ' ' +
-            Object.values(this.time).join(':'),
+            Object.values(this.time).join(':').substr(0,5),
           this.swabForm.getRawValue().type,
           this.swabToUpdate.patient_id,
           Number(this.swabForm.getRawValue().done),
@@ -147,27 +147,25 @@ export class swabsTableComponent implements OnInit {
             alert('Swab updated succesfully');
             this.modalService.dismissAll();
             this.errors = {};
-            await this.getSwabsByDate();
+            await this.updateSwabs()
           },
           (err) => {
-            console.log(err);
             if (err.error.errors) {
               err.error.errors.forEach((item: {}) => {
                 (<any>this.errors)[Object.keys(item)[0]] = Object.values(
                   item
                 )[0];
               });
-            }
+            }else alert(err.error && err.error);
           }
         );
-       
     } else if (this.action === 'post') {
       this.swabsService
         .addSwab(
           this.swabForm.getRawValue().team_id,
           this.swabForm.getRawValue().date +
             ' ' +
-            Object.values(this.time).join(':'),
+            Object.values(this.time).join(':').substr(0,5),
           this.swabForm.getRawValue().type,
           this.swabForm.getRawValue().patient_id,
           Number(this.swabForm.getRawValue().done),
@@ -177,8 +175,7 @@ export class swabsTableComponent implements OnInit {
           async (res) => {
             alert('Swab added succesfully');
             this.modalService.dismissAll();
-            await this.getSwabsByDate();
-            this.errors = {};
+            await this.updateSwabs()
           },
           (err) => {
             if (err.error.errors) {
@@ -187,10 +184,10 @@ export class swabsTableComponent implements OnInit {
                   item
                 )[0];
               });
-            }
+            }else alert(err.error && err.error);
+
           }
         );
     }
-   
   }
 }

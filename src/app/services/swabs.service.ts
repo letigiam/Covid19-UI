@@ -17,7 +17,6 @@ export class SwabsService {
     private router: Router
   ) {}
   handleHttpErrors = (err: any) => {
-    console.log(err);
     alert(err.error ? err.error : 'Error');
     if (err.status === 401) {
       this.router.navigate(['login']);
@@ -25,6 +24,7 @@ export class SwabsService {
   };
 
   allSwabs = () =>
+    
     this.httpClient
       .get<SwabCalendar>(this.url, {
         headers: {

@@ -34,7 +34,7 @@
           <td>{{ patient.address }}</td>
           <td>{{ patient.email }}</td>
           <td>{{ patient.phone }}</td>
-          <td>{{ patient.hasCovid }}</td>
+          <td><i [ngClass]="[patient.hasCovid ? 'far fa-check-circle' : 'fas fa-times']"></i></td>
         </tr>
       </tbody>
     </table>

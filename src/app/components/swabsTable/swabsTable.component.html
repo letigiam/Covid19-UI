@@ -101,9 +101,9 @@
           </tbody>
         </table>
       </div>
-      <ng-template #swabModal let-modal class="">
+      <ng-template #swabModal let-modal class="modal">
         <div class="modal-header myModal">
-          <h5 class="modal-title" id="modalLabel">{{ action }} Swab</h5>
+          <h2 class="modal-title" id="modalLabel">{{ action }} Swab</h2>
           <button
             type="button"
             class="close"
@@ -202,6 +202,7 @@
               <input
                 type="checkbox"
                 class="form-check-input"
+                formControlName="done"
                 id="alreadyDone"
                 value=""
               />
@@ -213,6 +214,7 @@
               <input
                 type="checkbox"
                 class="form-check-input"
+                formControlName="positive_res"
                 id="positive_res"
                 value=""
               />

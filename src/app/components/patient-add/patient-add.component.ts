@@ -69,10 +69,7 @@ export class PatientAddComponent implements OnInit {
             err.error.errors.forEach((item: {}) => {
               (<any>this.errors)[Object.keys(item)[0]] = Object.values(item)[0];
             });
-          } else {
-            alert('ERROR ' + err.error);
-          }
-          console.log(err);
+          }else alert(err.error && err.error);
         }
       );
   }

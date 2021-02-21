@@ -15,7 +15,6 @@ export class PatientsService {
     private router: Router
   ) {}
   handleHttpErrors = (err: any) => {
-    console.log(err);
     alert(err.error ? err.error : err.message);
     if (err.status === 401) {
       this.router.navigate(['login']);

@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['home']);
       },
       (error) => {
-        console.log(error);
         if (error.error.errors) {
           error.error.errors.map((err: any) => {
             this.errors.push(String(Object.values(err)[0]));
@@ -36,7 +35,6 @@ export class LoginComponent implements OnInit {
         } else if (error.error) {
           this.errors = [error.error];
         }
-        console.log(this.errors);
       }
     );
   };

@@ -69,15 +69,13 @@ export class patientsTableComponent implements OnInit {
           this.errors = {};
         },
         (err) => {
-          alert('Error');
-          console.log('Error is, ', err);
+
           if (err.error.errors) {
             err.error.errors.forEach((item: {}) => {
               (<any>this.errors)[Object.keys(item)[0]] = Object.values(item)[0];
             });
-          } else {
-            alert('ERROR ' + err.error);
-          }
+          }else alert(err.error && err.error);
+
         }
       );
   }
@@ -87,8 +85,7 @@ export class patientsTableComponent implements OnInit {
         alert('Patient Deleted');
       },
       (error) => {
-        alert('Error');
-        console.log('Error is, ', error);
+        alert(error.error && error.error);
       }
     );
     this.modalService.dismissAll();

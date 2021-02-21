@@ -10,7 +10,12 @@ label{    font-family: Poppins;
   margin-left:10px;
   position: fixed;
 }
-
+.modal-title{
+  color: #fff;
+  font-weight: 700;
+  font-size: 2.5em;
+  text-shadow: 2px 2px #000000;
+}
 table {
   width: 100%;
   border-radius:10px;
@@ -18,6 +23,12 @@ table {
 
 .myBtn{
   background-color:#448067;
+}
+.fa-check-circle {
+  color: green;
+}
+.fa-times {
+  color: red;
 }
 
 
