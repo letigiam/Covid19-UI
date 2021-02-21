@@ -56,7 +56,7 @@ export class swabsTableComponent implements OnInit {
     this.daysSelectedContent = Object.values(this.allSwabs);
     if (selectedOptions[0].value !== 'all')
       this.daysSelectedContent = this.daysSelectedContent.map((array: Swab[]) =>
-        array.filter((swab: any) => swab[filter] === Number(selectedOptions[0].value))
+        array.filter((swab: any) => swab[filter] == selectedOptions[0].value)
       );
   }
  
