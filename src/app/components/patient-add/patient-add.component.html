@@ -155,12 +155,12 @@
 
 <button
   type="button"
-  class="btn btn-success btn-edit"
+  class="btn btn-success btn-edit btn-radius"
   (click)="openModal(addPatientModal)"
 >
   Add Patient
 </button>
-<ng-template #addPatientModal let-modal>
+<ng-template #addPatientModal let-modal class="myForm">
   <div class="modal-header">
     <h5 class="modal-title" id="addPatientModal">Register Patient Form</h5>
     <button
@@ -174,8 +174,10 @@
   </div>
 
   <div class="modal-body">
-    <form [formGroup]="addPatientForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="addPatientForm" (ngSubmit)="onSubmit()" class="myForm">
       <div class="form-group row">
+        <span *ngIf="errors && errors.name">{{ errors.name }}</span>
+
         <label for="address" class="col-sm-4 col-form-label">Name</label>
         <div class="col-sm-8">
           <input
@@ -183,11 +185,13 @@
             class="form-control"
             formControlName="name"
             id="name"
-            [ngClass]="[name.includes('ERROR') ? 'error' : '']"
+            [ngClass]="[errors.name ? 'error' : '']"
           />
         </div>
       </div>
       <div class="form-group row">
+        <span *ngIf="errors && errors.email">{{ errors.email }}</span>
+
         <label for="email" class="col-sm-4 col-form-label">Email</label>
         <div class="col-sm-8">
           <input
@@ -195,11 +199,13 @@
             class="form-control"
             formControlName="email"
             id="email"
-            [ngClass]="[email.includes('ERROR') ? 'error' : '']"
+            [ngClass]="[errors.email ? 'error' : '']"
           />
         </div>
       </div>
       <div class="form-group row">
+        <span *ngIf="errors && errors.dob">{{ errors.dob }}</span>
+
         <label for="phone" class="col-sm-4 col-form-label">Date of Birth</label>
         <div class="col-sm-8">
           <input
@@ -207,12 +213,16 @@
             class="form-control"
             formControlName="dob"
             id="dob"
-            [ngClass]="[dob.includes('ERROR') ? 'error' : '']"
+            [ngClass]="[errors.dob ? 'error' : '']"
           />
         </div>
       </div>
 
       <div class="form-group row">
+        <span *ngIf="errors && errors.fiscal_code">{{
+          errors.fiscal_code
+        }}</span>
+
         <label for="phone" class="col-sm-4 col-form-label">Fiscal Code</label>
         <div class="col-sm-8">
           <input
@@ -220,11 +230,13 @@
             class="form-control"
             formControlName="fiscal_code"
             id="fiscal_code"
-            [ngClass]="[fiscal_code.includes('ERROR') ? 'error' : '']"
+            [ngClass]="[errors.fiscal_code ? 'error' : '']"
           />
         </div>
       </div>
       <div class="form-group row">
+        <span *ngIf="errors && errors.address">{{ errors.address }}</span>
+
         <label for="address" class="col-sm-4 col-form-label">Address</label>
         <div class="col-sm-8">
           <input
@@ -232,11 +244,13 @@
             class="form-control"
             formControlName="address"
             id="address"
-            [ngClass]="[address.includes('ERROR') ? 'error' : '']"
+            [ngClass]="[errors.address ? 'error' : '']"
           />
         </div>
       </div>
       <div class="form-group row">
+        <span *ngIf="errors && errors.phone">{{ errors.phone }}</span>
+
         <label for="phone" class="col-sm-4 col-form-label">Phone</label>
         <div class="col-sm-8">
           <input
@@ -244,7 +258,7 @@
             class="form-control"
             formControlName="phone"
             id="phone"
-            [ngClass]="[phone.includes('ERROR') ? 'error' : '']"
+            [ngClass]="[errors.phone ? 'error' : '']"
           />
         </div>
       </div>

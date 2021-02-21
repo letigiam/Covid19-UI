@@ -17,7 +17,8 @@ export class SwabsService {
     private router: Router
   ) {}
   handleHttpErrors = (err: any) => {
-    alert(err.message ? err.message : 'Error');
+    console.log(err);
+    alert(err.error ? err.error : 'Error');
     if (err.status === 401) {
       this.router.navigate(['login']);
     }
@@ -31,7 +32,8 @@ export class SwabsService {
         },
       })
       .toPromise()
-      .catch((err) => this.handleHttpErrors(err));
+      .catch(this.handleHttpErrors);
+
   allSwabsByDate = (dateStart: string, dateEnd: string) =>
     this.httpClient
       .get<SwabCalendar>(
@@ -53,25 +55,22 @@ export class SwabsService {
     done: number,
     positive_res: number
   ) =>
-    this.httpClient
-      .post(
-        this.url,
-        {
-          team_id,
-          date,
-          type,
-          patient_id,
-          done,
-          positive_res,
+    this.httpClient.post(
+      this.url,
+      {
+        team_id,
+        date,
+        type,
+        patient_id,
+        done,
+        positive_res,
+      },
+      {
+        headers: {
+          'x-auth-token': this.localStorageService.get('token'),
         },
-        {
-          headers: {
-            'x-auth-token': this.localStorageService.get('token'),
-          },
-        }
-      )
-      .toPromise()
-      .catch(this.handleHttpErrors);
+      }
+    );
   updateSwab = (
     swab_id: number,
     team_id: number,
@@ -81,25 +80,22 @@ export class SwabsService {
     done: number,
     positive_res: number
   ) =>
-    this.httpClient
-      .put(
-        `${this.url}/${swab_id}`,
-        {
-          team_id,
-          date,
-          type,
-          patient_id,
-          done,
-          positive_res,
+    this.httpClient.put(
+      `${this.url}/${swab_id}`,
+      {
+        team_id,
+        date,
+        type,
+        patient_id,
+        done,
+        positive_res,
+      },
+      {
+        headers: {
+          'x-auth-token': this.localStorageService.get('token'),
         },
-        {
-          headers: {
-            'x-auth-token': this.localStorageService.get('token'),
-          },
-        }
-      )
-      .toPromise()
-      .catch(this.handleHttpErrors);
+      }
+    );
   deleteSwab = (swab_id: number) =>
     this.httpClient
       .delete(`${this.url}/${swab_id}`, {

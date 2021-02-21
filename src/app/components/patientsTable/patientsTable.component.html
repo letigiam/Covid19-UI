@@ -1,121 +1,127 @@
 <!DOCTYPE html>
+<h3>Covid's Patients</h3>
 <div class="row justify-content-center">
   <div class="col-12 col-md-11 justify-content-start">
     <app-patient-add (emitter)="updatePatients()"></app-patient-add>
   </div>
 </div>
 
-<div class="row justify-content-center">
+<div class="row justify-content-center ">
   <div class="col-12 col-md-11">
-      <table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Name</th>
-      <th scope="col">Fiscal Code</th>
-      <th scope="col">Birth's Day</th>
-      <th scope="col">Address</th>
-      <th scope="col">Email</th>
-      <th scope="col">Phone</th>
-      <th scope="col">Has Covid</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr
-      *ngFor="let patient of patients"
-      (click)="openModal(editPatientModal, patient)"
-      class="patient_row"
-    >
-      <th scope="row">{{ patient.patient_id }}</th>
-      <td>{{ patient.name }}</td>
-      <td>{{ patient.fiscal_code }}</td>
-      <td>{{ patient.dob }}</td>
-      <td>{{ patient.address }}</td>
-      <td>{{ patient.email }}</td>
-      <td>{{ patient.phone }}</td>
-      <td>{{ patient.hasCovid }}</td>
-    </tr>
-  </tbody>
-</table>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Fiscal Code</th>
+          <th scope="col">Birth's Day</th>
+          <th scope="col">Address</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Has Covid</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let patient of patients"
+          (click)="openModal(editPatientModal, patient)"
+          class="patient_row"
+        >
+          <th scope="row">{{ patient.patient_id }}</th>
+          <td>{{ patient.name }}</td>
+          <td>{{ patient.fiscal_code }}</td>
+          <td>{{ patient.dob }}</td>
+          <td>{{ patient.address }}</td>
+          <td>{{ patient.email }}</td>
+          <td>{{ patient.phone }}</td>
+          <td>{{ patient.hasCovid }}</td>
+        </tr>
+      </tbody>
+    </table>
 
-<ng-template #editPatientModal let-modal>
-  <div class="modal-header">
-    <h5 class="modal-title" id="editProfileLabel">Edit Patient</h5>
-    <button
-      type="button"
-      class="close"
-      (click)="modal.dismiss()"
-      aria-label="Close"
-    >
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-
-  <div class="modal-body">
-    <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
-      <div class="form-group row">
-        <label for="address" class="col-sm-4 col-form-label">Address</label>
-        <div class="col-sm-8">
-          <input
-            type="text"
-            class="form-control"
-            formControlName="address"
-            id="address"
-          />
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="email" class="col-sm-4 col-form-label">Email</label>
-        <div class="col-sm-8">
-          <input
-            type="text"
-            class="form-control"
-            formControlName="email"
-            id="email"
-          />
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="phone" class="col-sm-4 col-form-label">Phone</label>
-        <div class="col-sm-8">
-          <input
-            type="text"
-            class="form-control"
-            formControlName="phone"
-            id="phone"
-          />
-        </div>
-      </div>
-      <div class="form-check">
-        <label class="form-check-label" for="flexCheckDefault">
-          Has Covid
-        </label>
-        <input
-          class="form-check-input"
-          type="checkbox"
-          formControlName="hasCovid"
-          value=""
-          id="flexCheckDefault"
-        />
-      </div>
-      <div class="modal-footer">
+    <ng-template #editPatientModal let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title" id="editProfileLabel">Edit Patient</h5>
         <button
           type="button"
-          class="btn btn-secondary btn-radius"
+          class="close"
           (click)="modal.dismiss()"
+          aria-label="Close"
         >
-          Close
-        </button>
-        <button type="submit" class="btn btn-success btn-radius">
-          Save changes
+          <span aria-hidden="true">&times;</span>
         </button>
       </div>
-    </form>
-    <button class="btn btn-danger btn-radius" (click)="onDelete()">
-      Delete
-    </button>
-  </div>
-</ng-template>
+
+      <div class="modal-body">
+        <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
+          <div class="form-group row">
+            <span *ngIf="errors && errors.address">{{ errors.address }}</span>
+            <label for="address" class="col-sm-4 col-form-label">Address</label>
+            <div class="col-sm-8">
+              <input
+                [ngClass]="[errors.address ? 'error' : '']"
+                type="text"
+                class="form-control"
+                formControlName="address"
+                id="address"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <span *ngIf="errors && errors.email">{{ errors.email }}</span>
+            <label for="email" class="col-sm-4 col-form-label">Email</label>
+            <div class="col-sm-8">
+              <input
+                [ngClass]="[errors.email ? 'error' : '']"
+                type="text"
+                class="form-control"
+                formControlName="email"
+                id="email"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <span *ngIf="errors && errors.phone">{{ errors.phone }}</span>
+            <label for="phone" class="col-sm-4 col-form-label">Phone</label>
+            <div class="col-sm-8">
+              <input
+                [ngClass]="[errors.phone ? 'error' : '']"
+                type="text"
+                class="form-control"
+                formControlName="phone"
+                id="phone"
+              />
+            </div>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label" for="flexCheckDefault">
+              Has Covid
+            </label>
+            <input
+              class="form-check-input"
+              type="checkbox"
+              formControlName="hasCovid"
+              value=""
+              id="flexCheckDefault"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary btn-radius"
+              (click)="modal.dismiss()"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-success btn-radius">
+              Save changes
+            </button>
+          </div>
+        </form>
+        <button class="btn btn-danger btn-radius" (click)="onDelete()">
+          Delete
+        </button>
+      </div>
+    </ng-template>
   </div>
 </div>
-

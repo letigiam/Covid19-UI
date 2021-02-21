@@ -26,7 +26,8 @@ export class PatientsService {
       .get<Patient[]>(this.url, {
         headers: { 'x-auth-token': this.localStorageService.get('token') },
       })
-      .toPromise();
+      .toPromise()
+      .catch(this.handleHttpErrors);
 
   getPatient = (id: string) =>
     this.httpClient

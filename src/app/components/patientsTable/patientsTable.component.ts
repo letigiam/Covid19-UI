@@ -15,6 +15,7 @@ export class patientsTableComponent implements OnInit {
   editProfileForm!: FormGroup;
   patient!: Patient;
   message!: string;
+  errors: any = {};
   constructor(
     private patientsService: PatientsService,
     private modalService: NgbModal,
@@ -23,30 +24,16 @@ export class patientsTableComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    try {
-      this.patients = await this.patientsService.getAllPatients();
-    } catch (err) {
-      alert(err.error ? err.error : err.message);
-      if (err.status === 401) {
-        this.router.navigate(['login']);
-      }
-    }
     this.editProfileForm = this.fb.group({
       address: [''],
       email: [''],
       phone: [''],
       hasCovid: [''],
     });
+    this.patients = await this.patientsService.getAllPatients();
   }
   updatePatients = async () => {
-    try {
-      this.patients = await this.patientsService.getAllPatients();
-    } catch (err) {
-      alert(err.error ? err.error : err.message);
-      if (err.status === 401) {
-        this.router.navigate(['login']);
-      }
-    }
+    this.patients = await this.patientsService.getAllPatients();
   };
   openModal(targetModal: any, patient: Patient) {
     this.modalService.open(targetModal, {
@@ -79,14 +66,14 @@ export class patientsTableComponent implements OnInit {
           alert('Patient Modified');
           this.patients = await this.patientsService.getAllPatients();
           this.modalService.dismissAll();
+          this.errors = {};
         },
         (err) => {
           alert('Error');
           console.log('Error is, ', err);
           if (err.error.errors) {
             err.error.errors.forEach((item: {}) => {
-              (<any>this)[Object.keys(item)[0]] =
-                'ERROR ' + Object.values(item)[0];
+              (<any>this.errors)[Object.keys(item)[0]] = Object.values(item)[0];
             });
           } else {
             alert('ERROR ' + err.error);

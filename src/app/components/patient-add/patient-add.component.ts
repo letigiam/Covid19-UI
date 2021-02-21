@@ -22,6 +22,7 @@ export class PatientAddComponent implements OnInit {
   message = '';
   addPatientForm!: FormGroup;
   picker = '';
+  errors: any = {};
   constructor(
     private patientsService: PatientsService,
     private modalService: NgbModal,
@@ -61,12 +62,12 @@ export class PatientAddComponent implements OnInit {
         (Response) => {
           alert('Patient registered');
           this.emitter.emit(true);
+          this.errors = {};
         },
         (err) => {
           if (err.error.errors) {
             err.error.errors.forEach((item: {}) => {
-              (<any>this)[Object.keys(item)[0]] =
-                'ERROR ' + Object.values(item)[0];
+              (<any>this.errors)[Object.keys(item)[0]] = Object.values(item)[0];
             });
           } else {
             alert('ERROR ' + err.error);

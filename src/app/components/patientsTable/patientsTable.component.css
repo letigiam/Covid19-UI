@@ -8,7 +8,7 @@ table {
 
 .btn-radius {
   border-radius: 25px;
-  font-family: Poppins-Medium;
+  font-family: Poppins;
   font-size: 15px;
   line-height: 1.5;
   color: #fff;
@@ -16,12 +16,14 @@ table {
 
 .btn-edit {
   border-radius: 25px;
-  font-family: Poppins-Medium;
+  font-family: Poppins;
   font-size: 15px;
   line-height: 1.5;
   color: #fff;
 }
-
+.error {
+  border-color: #ff2222;
+}
 .form-check-input {
   margin-left: 0px;
   left: 177px;
